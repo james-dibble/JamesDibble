@@ -9,6 +9,8 @@ namespace JamesDibble.UnitTesting.Extensions.System
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using global::System.Collections.Generic;
+
     /// <summary>
     /// The string extensions tests.
     /// </summary>
@@ -44,6 +46,36 @@ namespace JamesDibble.UnitTesting.Extensions.System
         }
 
         #region Pluralise
+
+        /// <summary>
+        /// Test pluralise with null collection.
+        /// </summary>
+        [TestMethod]
+        public void TestPluraliseWithNullCollection()
+        {
+            IEnumerable<string> fakeCollection = null;
+
+            const string expected = "random";
+
+            var actual = expected.Pluralise(fakeCollection);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// Test pluralise with populated collection.
+        /// </summary>
+        [TestMethod]
+        public void TestPluraliseWithPopulatedCollection()
+        {
+            IEnumerable<string> fakeCollection = new List<string>() { "Yo", "YoYo", "YoYoYo" };
+
+            const string expected = "random";
+
+            var actual = expected.Pluralise(fakeCollection);
+
+            Assert.AreEqual(expected, actual);
+        }
 
         /// <summary>
         /// The test pluralise no need to pluralise.

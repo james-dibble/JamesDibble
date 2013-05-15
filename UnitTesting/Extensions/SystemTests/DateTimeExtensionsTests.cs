@@ -29,6 +29,19 @@ namespace JamesDibble.UnitTesting.Extensions.System
         }
 
         /// <summary>
+        /// The test date ordinal less than 10 greater than 3.
+        /// </summary>
+        [TestMethod]
+        public void TestDateOrdinalLessThan10GreaterThan3()
+        {
+            const string expected = "7th";
+
+            var actual = new DateTime(2000, 01, 07).Ordinal();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
         /// The test date ordinal eleven.
         /// </summary>
         [TestMethod]
