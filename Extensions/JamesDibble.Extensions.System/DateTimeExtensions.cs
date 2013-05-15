@@ -8,7 +8,7 @@ namespace System
     using System.Globalization;
 
     /// <summary>
-    /// The date time extensions.
+    /// Extensions of the <see cref="DateTime"/> class.
     /// </summary>
     public static class DateTimeExtensions
     {
@@ -19,7 +19,7 @@ namespace System
         /// The date.
         /// </param>
         /// <returns>
-        /// An ordinal representation of the day.  Eg: 15th
+        /// An ordinal representation of the day.  <c>Eg: 15th</c>
         /// </returns>
         public static string Ordinal(this DateTime date)
         {
