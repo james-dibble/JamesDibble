@@ -1,14 +1,22 @@
-#Extensions
-Horribly misnamed, this solution started out as a library for sharing C# extension methods between projects.
+#JamesDibble
+Everyone has to have something named after themselves right...?
 
-It then became the container for my `JamesDibble.Application` namespace that defines my little application framework.
-___
+Here we have my (work in progress) application framework, collection of extension methods and service bus implementation.
+
 ##Application Framework
-The `Application` project is my attempt at an application management framework.  Essentially, it is a static wrapper for access to essential functions from within the various layers of a system such as persistence, logging and configuration.  It is by no means perfect and it creates some interesting design decisions as it can lead to persistence being accessible from presentation layers if not configured properly.
+This is my collection of classes that I use to abstract certain operations out of actual projects I complete for other people.  After completing a couple of websites for clients, it was obvious what code could be extracted and shared between projects, so thats exactly what I did.
 
-It uses Microsofts [Managed Extensibility Framework (MEF)](http://mef.codeplex.com/) as an IOC so that types can be resolved using the `[Export]` attribute.  Most of the namespaces within the project contain interfaces to build domain specific implementations of each "Manager".  The other projects provide implementations of some of those managers that I have shared between applications.  At some point I will create some more extensive documentation on each of these.
+The idea is to create a consistant interface for accessing things like persitence and configuration.
 
-##Building the Solution
-All the projects will require you to reference MEF by downloading the latest version from the Codeplex Site, unless building the solution using .Net 4.5.
+Documentation for this will eventally appear on my [blog/portfolio website](http://www.jdibble.co.uk).
 
-The `Data` project will require a local reference to the Entity Framework as I delpoy to a shared hosting provider, I build my web projects with pretty much everything that isn't part of the core .Net Framework.
+##Extensions
+Speaks for itself, butt loads of extension methods!  I think every solo .Net programmer has at some point said "I'm gonna create a library to share all these extension methods one day...".  Well I actually did.  This is the proof.  So there.
+
+##Service Bus
+This namespace could be part of the Application Framework, but I felt it deserved it's own place in the solution.
+
+Documentation for this will eventally appear on my [blog/portfolio website](http://www.jdibble.co.uk).
+
+##Legal Shizzle
+For now, take what you want.  Use where you want.  Simples.
