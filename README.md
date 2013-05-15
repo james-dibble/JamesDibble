@@ -3,6 +3,8 @@ Everyone has to have something named after themselves right...?
 
 Here we have my (work in progress) application framework, collection of extension methods and service bus implementation.
 
+* * *
+
 ##Application Framework
 This is my collection of classes that I use to abstract certain operations out of actual projects I complete for other people.  After completing a couple of websites for clients, it was obvious what code could be extracted and shared between projects, so thats exactly what I did.
 
