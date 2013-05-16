@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc", "Extensions\Mvc\Mvc.c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTests", "UnitTesting\Extensions\MvcTests\MvcTests.csproj", "{A1BAF252-7EC1-4609-916D-A8082D901D3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "ApplicationFramework\Configuration\Configuration.csproj", "{02901128-926D-4282-900D-D921C2D8EDC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,11 +73,16 @@ Global
 		{A1BAF252-7EC1-4609-916D-A8082D901D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1BAF252-7EC1-4609-916D-A8082D901D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1BAF252-7EC1-4609-916D-A8082D901D3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02901128-926D-4282-900D-D921C2D8EDC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02901128-926D-4282-900D-D921C2D8EDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02901128-926D-4282-900D-D921C2D8EDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02901128-926D-4282-900D-D921C2D8EDC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{02901128-926D-4282-900D-D921C2D8EDC9} = {B8CC019E-98FD-4578-8109-E6C8D666FB6E}
 		{C2DBAB1F-95CB-425A-A800-06F45001F759} = {6427EC68-5517-4DD5-845A-98D94695BDB9}
 		{70100C35-0ABC-486E-A04D-84055EBEDEB5} = {6427EC68-5517-4DD5-845A-98D94695BDB9}
 		{4502F0FC-328E-4C7E-B8C3-AC2985F48ABF} = {6427EC68-5517-4DD5-845A-98D94695BDB9}
