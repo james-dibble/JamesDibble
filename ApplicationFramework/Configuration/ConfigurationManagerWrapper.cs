@@ -25,6 +25,19 @@ namespace JamesDibble.ApplicationFramework.Configuration
         }
 
         /// <summary>
+        /// Gets a configured value for the title of a window.
+        /// </summary>
+        public string BaseTitle 
+        {
+            get
+            {
+                var configurationSection = this.GetSection<ApplicationConfigurationSection>("applicationConfiguration");
+
+                return configurationSection.BaseTitle.Title;
+            }
+        }
+
+        /// <summary>
         /// Get a named connection.
         /// </summary>
         /// <param name="name">

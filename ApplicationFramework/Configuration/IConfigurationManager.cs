@@ -19,6 +19,11 @@ namespace JamesDibble.ApplicationFramework.Configuration
         NameValueCollection AppSettings { get; }
 
         /// <summary>
+        /// Gets a configured value for the title of a window.
+        /// </summary>
+        string BaseTitle { get; }
+
+        /// <summary>
         /// Get a named connection.
         /// </summary>
         /// <param name="name">
@@ -42,5 +47,16 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// The configuration section of type <see cref="T"/>.
         /// </returns>
         T GetSection<T>(string sectionName) where T : ConfigurationSection;
+
+        /// <summary>
+        /// The resource path.
+        /// </summary>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        string ResourcePath(string type);
     }
 }

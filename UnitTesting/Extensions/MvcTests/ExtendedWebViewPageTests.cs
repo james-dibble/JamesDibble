@@ -5,9 +5,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.UnitTesting.Extensions.MvcTests
 {
-    using JamesDibble.Extensions.Mvc;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using JamesDibble.ApplicationFramework.Configuration;
+using JamesDibble.Extensions.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
 
     /// <summary>
     /// Tests for the <see cref="ExtendedWebViewPage{T}"/> class.
@@ -15,15 +16,17 @@ namespace JamesDibble.UnitTesting.Extensions.MvcTests
     [TestClass]
     public class ExtendedWebViewPageTests
     {
+        private const string _baseTitle = "Base Title";
+        private const string _baseResourcePath = "../'images";
+
         /// <summary>
         /// Test for the Resource Method.
         /// </summary>
-        /// <remarks>TODO: Must eventually look at the application configuration once developed.</remarks>
         [TestMethod]
         public void TestResource()
         {
             const string resourceKey = "image";
-            var configuratedResourcePath = string.Empty;
+            var configuratedResourcePath = _baseResourcePath;
             
             const string resourcePath = "/pictures/thing.png";
 
@@ -40,9 +43,11 @@ namespace JamesDibble.UnitTesting.Extensions.MvcTests
         [TestMethod]
         public void TestGetTitle()
         {
-            const string expected = "Title";
+            const string input = "Title";
 
-            var fake = new FakeChildClass { Title = expected };
+            var fake = new FakeChildClass { Title = input };
+
+            var expected = string.Concat(_baseTitle, input);
 
             var actual = fake.Title;
 
@@ -52,11 +57,10 @@ namespace JamesDibble.UnitTesting.Extensions.MvcTests
         /// <summary>
         /// The test set title.
         /// </summary>
-        /// <remarks>TODO: Must eventually look at the application configuration once developed.</remarks>
         [TestMethod]
         public void TestSetTitle()
         {
-            var configuredBaseTitle = string.Empty;
+            var configuredBaseTitle = _baseTitle;
 
             const string testTitle = "Title";
 
@@ -74,6 +78,19 @@ namespace JamesDibble.UnitTesting.Extensions.MvcTests
             /// </summary>
             public override void Execute()
             {
+            }
+
+            protected override IConfigurationManager Configuration
+            {
+                get
+                {
+                    var fakeConfiguration = new Mock<IConfigurationManager>();
+
+                    fakeConfiguration.Setup(c => c.BaseTitle).Returns(_baseTitle);
+                    fakeConfiguration.Setup(c => c.ResourcePath(It.IsAny<string>())).Returns(_baseResourcePath);
+
+                    return fakeConfiguration.Object;
+                }
             }
         }
     }

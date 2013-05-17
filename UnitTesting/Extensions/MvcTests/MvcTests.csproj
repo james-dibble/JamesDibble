@@ -35,7 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\Dependencies\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -59,6 +63,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ApplicationFramework\Configuration\Configuration.csproj">
+      <Project>{02901128-926d-4282-900d-d921c2d8edc9}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Extensions\Mvc\Mvc.csproj">
       <Project>{4502F0FC-328E-4C7E-B8C3-AC2985F48ABF}</Project>
       <Name>Mvc</Name>

@@ -55,9 +55,10 @@ namespace JamesDibble.UnitTesting.Extensions.System
         {
             IEnumerable<string> fakeCollection = null;
 
-            const string expected = "random";
+            const string input = "random";
+            const string expected = "randoms";
 
-            var actual = expected.Pluralise(fakeCollection);
+            var actual = input.Pluralise(fakeCollection);
 
             Assert.AreEqual(expected, actual);
         }
@@ -70,9 +71,10 @@ namespace JamesDibble.UnitTesting.Extensions.System
         {
             IEnumerable<string> fakeCollection = new List<string>() { "Yo", "YoYo", "YoYoYo" };
 
-            const string expected = "random";
+            const string input = "random";
+            const string expected = "randoms";
 
-            var actual = expected.Pluralise(fakeCollection);
+            var actual = input.Pluralise(fakeCollection);
 
             Assert.AreEqual(expected, actual);
         }
