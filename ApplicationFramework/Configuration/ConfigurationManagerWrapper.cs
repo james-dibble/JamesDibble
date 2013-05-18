@@ -61,7 +61,7 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// The <see cref="ConfigurationSection"/> type.
         /// </typeparam>
         /// <returns>
-        /// The configuration section of type <see cref="T"/>.
+        /// The configuration section of type <typeparamref name="T"/>.
         /// </returns>
         public T GetSection<T>(string sectionName) where T : ConfigurationSection
         {

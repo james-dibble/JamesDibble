@@ -73,24 +73,24 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
         private class FakeChildClass : ExtendedWebViewPage<string>
         {
-            /// <summary>
-            /// Executes the server code in the current web page that is marked using Razor syntax.
-            /// </summary>
-            public override void Execute()
-            {
-            }
-
-            protected override IConfigurationManager Configuration
+            protected new IConfigurationManager Configuration
             {
                 get
                 {
                     var fakeConfiguration = new Mock<IConfigurationManager>();
 
-                    fakeConfiguration.Setup(c => c.BaseTitle).Returns(_baseTitle);
-                    fakeConfiguration.Setup(c => c.ResourcePath(It.IsAny<string>())).Returns(_baseResourcePath);
+                    fakeConfiguration.Setup(c => c.BaseTitle).Returns(ExtendedWebViewPageTests._baseTitle);
+                    fakeConfiguration.Setup(c => c.ResourcePath(It.IsAny<string>())).Returns(ExtendedWebViewPageTests._baseResourcePath);
 
                     return fakeConfiguration.Object;
                 }
+            }
+
+            /// <summary>
+            /// Executes the server code in the current web page that is marked using Razor syntax.
+            /// </summary>
+            public override void Execute()
+            {
             }
         }
     }

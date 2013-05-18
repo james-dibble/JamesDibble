@@ -40,6 +40,9 @@ namespace JamesDibble.Extensions.Mvc
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
         protected virtual IConfigurationManager Configuration
         {
             get
@@ -54,7 +57,7 @@ namespace JamesDibble.Extensions.Mvc
         public abstract override void Execute();
 
         /// <summary>
-        /// Create a path for a given <see cref="resourceTypeKey"/>.
+        /// Create a path for a given <paramref name="resourceTypeKey"/>.
         /// </summary>
         /// <param name="resourceTypeKey">
         /// The type of this resource.

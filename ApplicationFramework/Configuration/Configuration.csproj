@@ -33,6 +33,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\JamesDibble.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -48,6 +54,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceConfigurationElement.cs" />
     <Compile Include="ResourceLocationConfigurationElementCollection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\JamesDibble.pfx">
+      <Link>JamesDibble.pfx</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

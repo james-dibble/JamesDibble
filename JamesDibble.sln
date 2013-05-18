@@ -14,6 +14,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencie
 	ProjectSection(SolutionItems) = preProject
 		Dependencies\EntityFramework.dll = Dependencies\EntityFramework.dll
 		Dependencies\EntityFramework.xml = Dependencies\EntityFramework.xml
+		Dependencies\Microsoft.Practices.ServiceLocation.dll = Dependencies\Microsoft.Practices.ServiceLocation.dll
+		Dependencies\Microsoft.Practices.Unity.Configuration.dll = Dependencies\Microsoft.Practices.Unity.Configuration.dll
+		Dependencies\Microsoft.Practices.Unity.Configuration.xml = Dependencies\Microsoft.Practices.Unity.Configuration.xml
+		Dependencies\Microsoft.Practices.Unity.dll = Dependencies\Microsoft.Practices.Unity.dll
+		Dependencies\Microsoft.Practices.Unity.Interception.Configuration.dll = Dependencies\Microsoft.Practices.Unity.Interception.Configuration.dll
+		Dependencies\Microsoft.Practices.Unity.Interception.Configuration.xml = Dependencies\Microsoft.Practices.Unity.Interception.Configuration.xml
+		Dependencies\Microsoft.Practices.Unity.Interception.dll = Dependencies\Microsoft.Practices.Unity.Interception.dll
+		Dependencies\Microsoft.Practices.Unity.Interception.xml = Dependencies\Microsoft.Practices.Unity.Interception.xml
+		Dependencies\Microsoft.Practices.Unity.xml = Dependencies\Microsoft.Practices.Unity.xml
 		Dependencies\Moq.dll = Dependencies\Moq.dll
 		Dependencies\Moq.pdb = Dependencies\Moq.pdb
 		Dependencies\Moq.xml = Dependencies\Moq.xml
@@ -47,6 +56,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTests", "UnitTesting\Ext
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "ApplicationFramework\Configuration\Configuration.csproj", "{02901128-926D-4282-900D-D921C2D8EDC9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{A3B9B852-7E7D-4DD4-9D40-17AB279AFE9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{73E98DED-21C8-4EB1-B735-E5E639330BB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "ApplicationFramework\Data\Persistence\Persistence.csproj", "{4115485B-45E2-4BE7-9E6F-1B9661BF669A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistenceTests", "UnitTesting\ApplicationFramework\Data\PersistenceTests\PersistenceTests.csproj", "{F5110B1C-E711-48FD-87CA-A76662A86D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.EntityFramework", "ApplicationFramework\Data\Persistence.EntityFramework\Persistence.EntityFramework.csproj", "{1184A1D2-9269-49AB-B389-01578EA2C12E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.StoredProcedureMapping", "ApplicationFramework\Data\Persistence.StoredProcedureMapping\Persistence.StoredProcedureMapping.csproj", "{94FD34CB-32EB-4724-9ACD-893D7781CD41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,18 +98,43 @@ Global
 		{02901128-926D-4282-900D-D921C2D8EDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02901128-926D-4282-900D-D921C2D8EDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02901128-926D-4282-900D-D921C2D8EDC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4115485B-45E2-4BE7-9E6F-1B9661BF669A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4115485B-45E2-4BE7-9E6F-1B9661BF669A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4115485B-45E2-4BE7-9E6F-1B9661BF669A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4115485B-45E2-4BE7-9E6F-1B9661BF669A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5110B1C-E711-48FD-87CA-A76662A86D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5110B1C-E711-48FD-87CA-A76662A86D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5110B1C-E711-48FD-87CA-A76662A86D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5110B1C-E711-48FD-87CA-A76662A86D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1184A1D2-9269-49AB-B389-01578EA2C12E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1184A1D2-9269-49AB-B389-01578EA2C12E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1184A1D2-9269-49AB-B389-01578EA2C12E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1184A1D2-9269-49AB-B389-01578EA2C12E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94FD34CB-32EB-4724-9ACD-893D7781CD41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94FD34CB-32EB-4724-9ACD-893D7781CD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94FD34CB-32EB-4724-9ACD-893D7781CD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94FD34CB-32EB-4724-9ACD-893D7781CD41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{02901128-926D-4282-900D-D921C2D8EDC9} = {B8CC019E-98FD-4578-8109-E6C8D666FB6E}
+		{A3B9B852-7E7D-4DD4-9D40-17AB279AFE9C} = {B8CC019E-98FD-4578-8109-E6C8D666FB6E}
 		{C2DBAB1F-95CB-425A-A800-06F45001F759} = {6427EC68-5517-4DD5-845A-98D94695BDB9}
 		{70100C35-0ABC-486E-A04D-84055EBEDEB5} = {6427EC68-5517-4DD5-845A-98D94695BDB9}
 		{4502F0FC-328E-4C7E-B8C3-AC2985F48ABF} = {6427EC68-5517-4DD5-845A-98D94695BDB9}
 		{0833C853-8D73-4ECB-B209-7A2F375D6DB1} = {DC1FFEF9-6378-4F00-AD26-86ED7F8D3CCD}
 		{FCA55504-0339-4EF4-B799-8DE02F290C60} = {DC1FFEF9-6378-4F00-AD26-86ED7F8D3CCD}
+		{73E98DED-21C8-4EB1-B735-E5E639330BB4} = {0833C853-8D73-4ECB-B209-7A2F375D6DB1}
 		{83DF8328-D1F5-4BEB-BF30-AC5609BD6BE7} = {FCA55504-0339-4EF4-B799-8DE02F290C60}
 		{A1BAF252-7EC1-4609-916D-A8082D901D3A} = {FCA55504-0339-4EF4-B799-8DE02F290C60}
+		{4115485B-45E2-4BE7-9E6F-1B9661BF669A} = {A3B9B852-7E7D-4DD4-9D40-17AB279AFE9C}
+		{1184A1D2-9269-49AB-B389-01578EA2C12E} = {A3B9B852-7E7D-4DD4-9D40-17AB279AFE9C}
+		{94FD34CB-32EB-4724-9ACD-893D7781CD41} = {A3B9B852-7E7D-4DD4-9D40-17AB279AFE9C}
+		{F5110B1C-E711-48FD-87CA-A76662A86D6A} = {73E98DED-21C8-4EB1-B735-E5E639330BB4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal
