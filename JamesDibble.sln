@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.EntityFramework
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.StoredProcedureMapping", "ApplicationFramework\Data\Persistence.StoredProcedureMapping\Persistence.StoredProcedureMapping.csproj", "{94FD34CB-32EB-4724-9ACD-893D7781CD41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persitence.StoredProcedureMappingTests", "UnitTesting\ApplicationFramework\Data\Persitence.StoredProcedureMappingTests\Persitence.StoredProcedureMappingTests.csproj", "{7B5906D1-4DF7-48AF-986C-D1DCCBC828EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,10 @@ Global
 		{94FD34CB-32EB-4724-9ACD-893D7781CD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94FD34CB-32EB-4724-9ACD-893D7781CD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94FD34CB-32EB-4724-9ACD-893D7781CD41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B5906D1-4DF7-48AF-986C-D1DCCBC828EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5906D1-4DF7-48AF-986C-D1DCCBC828EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B5906D1-4DF7-48AF-986C-D1DCCBC828EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B5906D1-4DF7-48AF-986C-D1DCCBC828EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +139,7 @@ Global
 		{1184A1D2-9269-49AB-B389-01578EA2C12E} = {A3B9B852-7E7D-4DD4-9D40-17AB279AFE9C}
 		{94FD34CB-32EB-4724-9ACD-893D7781CD41} = {A3B9B852-7E7D-4DD4-9D40-17AB279AFE9C}
 		{F5110B1C-E711-48FD-87CA-A76662A86D6A} = {73E98DED-21C8-4EB1-B735-E5E639330BB4}
+		{7B5906D1-4DF7-48AF-986C-D1DCCBC828EA} = {73E98DED-21C8-4EB1-B735-E5E639330BB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

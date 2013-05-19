@@ -7,9 +7,9 @@ namespace JamesDibble.UnitTesting.Extensions.System
 {
     using global::System;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using global::System.Collections.Generic;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// The string extensions tests.

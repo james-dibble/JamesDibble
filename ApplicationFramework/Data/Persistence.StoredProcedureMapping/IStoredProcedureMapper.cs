@@ -14,7 +14,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
     /// <typeparam name="T">
     /// The type of <see cref="IPersistedObject"/> this <see cref="IStoredProcedureMapper{T}"/> maps.
     /// </typeparam>
-    public interface IStoredProcedureMapper<T> where T : class, IPersistedObject
+    public interface IStoredProcedureMapper<T> : IStoredProcedureMapper where T : class, IPersistedObject
     {
         /// <summary>
         /// Extract a domain object from the given <see cref="IDataReader"/>.
@@ -75,5 +75,12 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// A <see cref="IDbCommand"/> to delete this given object;
         /// </returns>
         IDbCommand GetDeleteCommand(T objectToDelete);
+    }
+
+    /// <summary>
+    /// Do not realise this interface.  Use <see cref="IStoredProcedureMapper{T}"/>.
+    /// </summary>
+    public interface IStoredProcedureMapper
+    {
     }
 }
