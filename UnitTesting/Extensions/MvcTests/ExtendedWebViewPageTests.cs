@@ -6,8 +6,8 @@
 namespace JamesDibble.UnitTesting.Extensions.MvcTests
 {
     using JamesDibble.ApplicationFramework.Configuration;
-using JamesDibble.Extensions.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using JamesDibble.Extensions.Mvc;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
     /// <summary>
@@ -17,7 +17,20 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
     public class ExtendedWebViewPageTests
     {
         private const string _baseTitle = "Base Title";
-        private const string _baseResourcePath = "../'images";
+        private const string _baseResourcePath = "../images";
+
+        private FakeChildClass _target;
+
+        [TestInitialize]
+        public void TestStartup()
+        {
+            var fakeConfiguration = new Mock<IConfigurationManager>();
+
+            fakeConfiguration.Setup(c => c.BaseTitle).Returns(ExtendedWebViewPageTests._baseTitle);
+            fakeConfiguration.Setup(c => c.ResourcePath(It.IsAny<string>())).Returns(ExtendedWebViewPageTests._baseResourcePath);
+
+            this._target = new FakeChildClass(fakeConfiguration.Object);
+        }
 
         /// <summary>
         /// Test for the Resource Method.
@@ -32,7 +45,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
             var expected = string.Concat(configuratedResourcePath, resourcePath);
 
-            var actual = new FakeChildClass().Resource(resourceKey, resourcePath);
+            var actual = this._target.Resource(resourceKey, resourcePath);
 
             Assert.AreEqual(expected, actual);
         }
@@ -45,11 +58,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
         {
             const string input = "Title";
 
-            var fake = new FakeChildClass { Title = input };
+            this._target.Title = input;
 
             var expected = string.Concat(_baseTitle, input);
 
-            var actual = fake.Title;
+            var actual = this._target.Title;
 
             Assert.AreEqual(expected, actual);
         }
@@ -66,24 +79,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
             var expected = string.Concat(configuredBaseTitle, testTitle);
 
-            var fake = new FakeChildClass { Title = testTitle };
+            this._target.Title = testTitle;
 
-            Assert.AreEqual(expected, fake.Title);
+            Assert.AreEqual(expected, this._target.Title);
         }
 
         private class FakeChildClass : ExtendedWebViewPage<string>
         {
-            protected new IConfigurationManager Configuration
+            internal FakeChildClass(IConfigurationManager manager)
+                : base(manager)
             {
-                get
-                {
-                    var fakeConfiguration = new Mock<IConfigurationManager>();
-
-                    fakeConfiguration.Setup(c => c.BaseTitle).Returns(ExtendedWebViewPageTests._baseTitle);
-                    fakeConfiguration.Setup(c => c.ResourcePath(It.IsAny<string>())).Returns(ExtendedWebViewPageTests._baseResourcePath);
-
-                    return fakeConfiguration.Object;
-                }
             }
 
             /// <summary>
