@@ -21,6 +21,9 @@ namespace JamesDibble.UnitTesting.Extensions.MvcTests
 
         private FakeChildClass _target;
 
+        /// <summary>
+        /// The test start up.
+        /// </summary>
         [TestInitialize]
         public void TestStartup()
         {

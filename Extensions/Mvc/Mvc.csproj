@@ -53,7 +53,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ApplicationFramework\Configuration\Configuration.csproj">
       <Project>{02901128-926d-4282-900d-d921c2d8edc9}</Project>
-      <Name>Configuration</Name>
+      <Name>Configuration %28ApplicationFramework\Configuration%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

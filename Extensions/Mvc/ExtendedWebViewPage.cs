@@ -19,6 +19,17 @@ namespace JamesDibble.Extensions.Mvc
         private IConfigurationManager _configuration;
 
         /// <summary>
+        /// Initialises a new instance of the <see cref="ExtendedWebViewPage{T}"/> class.
+        /// </summary>
+        /// <param name="configuration">
+        /// The configuration.
+        /// </param>
+        protected ExtendedWebViewPage(IConfigurationManager configuration)
+        {
+            this._configuration = configuration;
+        }
+
+        /// <summary>
         /// Gets or sets the title of this <see cref="WebViewPage{T}"/>.
         /// </summary>
         public string Title
@@ -43,11 +54,11 @@ namespace JamesDibble.Extensions.Mvc
         /// <summary>
         /// Gets the configuration.
         /// </summary>
-        protected virtual IConfigurationManager Configuration
+        protected IConfigurationManager Configuration
         {
             get
             {
-                return this._configuration ?? (this._configuration = new ConfigurationManagerWrapper());
+                return this._configuration;
             }
         }
 
@@ -72,7 +83,7 @@ namespace JamesDibble.Extensions.Mvc
         {
             var resourceTypePath = this.Configuration.ResourcePath(resourceTypeKey);
 
-            var fullPath = Path.Combine(resourceTypePath, resourcePath);
+            var fullPath = string.Concat(resourceTypePath, resourcePath);
 
             return fullPath;
         }
