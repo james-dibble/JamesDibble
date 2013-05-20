@@ -34,6 +34,9 @@ namespace Persitence.StoredProcedureMappingTests
             Assert.AreEqual(fakeMapper.Object, actual);
         }
 
+        /// <summary>
+        /// The fake object.
+        /// </summary>
         public class FakeObject : IPersistedObject
         {
         }
