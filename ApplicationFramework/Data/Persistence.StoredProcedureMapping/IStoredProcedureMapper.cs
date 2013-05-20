@@ -33,7 +33,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </summary>
         /// <param name="searchCriteria">Values to populate the select parameters.</param>
         /// <returns>A command to execute.</returns>
-        IDbCommand GetSelectCommand(IPersistenceSearcher searchCriteria);
+        IDbCommand GetSelectCommand(IPersistenceSearcher<T> searchCriteria);
 
         /// <summary>
         /// Get an <see cref="IDbCommand"/> to select a collection of the object matching the 
@@ -41,7 +41,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </summary>
         /// <param name="searchCriteria">Values to populate the select parameters.</param>
         /// <returns>A command to execute.</returns>
-        IDbCommand GetSelectCommand(IPersistenceCollectionSearcher searchCriteria);
+        IDbCommand GetSelectCommand(IPersistenceCollectionSearcher<T> searchCriteria);
 
         /// <summary>
         /// Get a <see cref="IDbCommand"/> that will insert a given object.

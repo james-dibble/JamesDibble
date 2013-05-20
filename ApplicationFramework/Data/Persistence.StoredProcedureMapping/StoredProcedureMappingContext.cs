@@ -40,7 +40,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// <returns>
         /// An <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
-        public T Find<T>(IPersistenceSearcher searchCriteria) where T : class, IPersistedObject
+        public T Find<T>(IPersistenceSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
             var mapper = this._mappers.GetMapperForType<T>();
 
@@ -70,7 +70,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// <returns>
         /// An <see cref="IEnumerable{T}"/> of <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
-        public IEnumerable<T> Find<T>(IPersistenceCollectionSearcher searchCriteria) where T : class, IPersistedObject
+        public IEnumerable<T> Find<T>(IPersistenceCollectionSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
             var mapper = this._mappers.GetMapperForType<T>();
             var collection = new List<T>();

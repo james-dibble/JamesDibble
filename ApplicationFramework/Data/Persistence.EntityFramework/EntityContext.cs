@@ -5,9 +5,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
 {
+    using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
 
+    using JamesDibble.ApplicationFramework.Configuration;
     using JamesDibble.ApplicationFramework.Data.Persistence;
 
     /// <summary>
@@ -15,6 +20,29 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
     /// </summary>
     public sealed class EntityContext : DbContext, IEntityContext
     {
+        /// <summary>
+        /// Initialises a new instance of the <see cref="EntityContext"/> class.
+        /// </summary>
+        /// <param name="configuration">
+        /// The configuration.
+        /// </param>
+        public EntityContext(IConfigurationManager configuration) : this(configuration.ConnectionString("default"))
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="EntityContext"/> class.
+        /// </summary>
+        /// <param name="connectionString">
+        /// The connection string to create this <see cref="EntityContext"/> with.
+        /// </param>
+        public EntityContext(string connectionString) : base(connectionString)
+        {
+            this.Configuration.ProxyCreationEnabled = true;
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.AutoDetectChangesEnabled = true;
+        }
+
         /// <summary>
         /// Find an <see cref="IPersistedObject"/>
         /// </summary>
@@ -27,9 +55,13 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// <returns>
         /// An <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
-        public T Find<T>(IPersistenceSearcher searchCriteria) where T : class, IPersistedObject
+        public T Find<T>(IPersistenceSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
-            return null;
+            var discoveredObject = this.GetSet<T>()
+                .Includes(searchCriteria.Includes.ToArray())
+                .SingleOrDefault(searchCriteria.Predicate);
+
+            return discoveredObject;
         }
 
         /// <summary>
@@ -44,9 +76,13 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// <returns>
         /// An <see cref="IEnumerable{T}"/> of <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
-        public IEnumerable<T> Find<T>(IPersistenceCollectionSearcher searchCriteria) where T : class, IPersistedObject
+        public IEnumerable<T> Find<T>(IPersistenceCollectionSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
-            yield break;
+            var collection = this.GetSet<T>()
+                .Includes(searchCriteria.Includes.ToArray())
+                .Where(searchCriteria.Predicate);
+
+            return collection;
         }
 
         /// <summary>
@@ -60,6 +96,9 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// </typeparam>
         public void Change<T>(T updatedObject) where T : class, IPersistedObject
         {
+            this.Set(typeof(T)).Attach(updatedObject);
+            ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.ChangeObjectState(
+                updatedObject, EntityState.Modified);
         }
 
         /// <summary>
@@ -73,6 +112,7 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// </typeparam>
         public void Add<T>(T newObject) where T : class, IPersistedObject
         {
+            this.Set(typeof(T)).Add(newObject);
         }
 
         /// <summary>
@@ -86,6 +126,7 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// </typeparam>
         public void Remove<T>(T objectToRemove) where T : class, IPersistedObject
         {
+            this.Set<T>().Remove(objectToRemove);
         }
 
         /// <summary>
@@ -99,7 +140,7 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// </returns>
         public T Create<T>() where T : class, IPersistedObject
         {
-            return null;
+            return this.Set(typeof(T)).Create() as T;
         }
 
         /// <summary>
@@ -108,6 +149,17 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         public void Commit()
         {
             this.SaveChanges();
+        }
+
+        private IQueryable<T> GetSet<T>() where T : class, IPersistedObject
+        {
+            if (typeof(T).IsInterface)
+            {
+                throw new ArgumentException(
+                    "Why on earth do think that you can get an entity set of a non concrete type?");
+            }
+
+            return this.Set<T>();
         }
     }
 }

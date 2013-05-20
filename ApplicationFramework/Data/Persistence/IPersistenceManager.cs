@@ -24,7 +24,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         /// <returns>
         /// An <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
-        T Find<T>(IPersistenceSearcher searchCriteria) where T : class, IPersistedObject;
+        T Find<T>(IPersistenceSearcher<T> searchCriteria) where T : class, IPersistedObject;
 
         /// <summary>
         /// Find a collection of <see cref="IPersistedObject"/>
@@ -38,7 +38,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         /// <returns>
         /// An <see cref="IEnumerable{T}"/> of <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
-        IEnumerable<T> Find<T>(IPersistenceCollectionSearcher searchCriteria) where T : class, IPersistedObject;
+        IEnumerable<T> Find<T>(IPersistenceCollectionSearcher<T> searchCriteria) where T : class, IPersistedObject;
 
         /// <summary>
         /// Update an object that already exists in the persistence source.

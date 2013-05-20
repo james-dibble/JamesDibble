@@ -5,10 +5,26 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.ApplicationFramework.Data.Persistence
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+
     /// <summary>
     /// Implementing classes define an object to search a persistence source.
     /// </summary>
-    public interface IPersistenceSearcher
-    { 
+    /// <typeparam name="T">
+    /// The type to search for.
+    /// </typeparam>
+    public interface IPersistenceSearcher<T> where T : class, IPersistedObject
+    {
+        /// <summary>
+        /// Gets the search criteria.
+        /// </summary>
+        Func<T, bool> Predicate { get; }
+
+        /// <summary>
+        /// Gets the objects that should also be loaded as part of the persistence query.
+        /// </summary>
+        IEnumerable<Expression<Func<T, object>>> Includes { get; } 
     }
 }

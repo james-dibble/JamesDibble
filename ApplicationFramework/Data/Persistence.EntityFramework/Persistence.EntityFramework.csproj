@@ -44,6 +44,7 @@
       <HintPath>..\..\..\Dependencies\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -59,6 +60,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Extensions\JamesDibble.Extensions.System.Data\JamesDibble.Extensions.System.Data.csproj">
+      <Project>{70100c35-0abc-486e-a04d-84055ebedeb5}</Project>
+      <Name>JamesDibble.Extensions.System.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Configuration\Configuration.csproj">
+      <Project>{02901128-926D-4282-900D-D921C2D8EDC9}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
       <Project>{4115485B-45E2-4BE7-9E6F-1B9661BF669A}</Project>
       <Name>Persistence</Name>

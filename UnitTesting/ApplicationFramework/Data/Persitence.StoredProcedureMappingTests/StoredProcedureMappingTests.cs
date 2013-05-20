@@ -83,7 +83,7 @@ namespace Persitence.StoredProcedureMappingTests
         public void TestFindSingleObject()
         {
             var mapperDictionary = new MapperDictionary();
-            var fakeSearchCriteria = new Mock<IPersistenceSearcher>();
+            var fakeSearchCriteria = new Mock<IPersistenceSearcher<FakeObject>>();
             var mapper = new Mock<IStoredProcedureMapper<FakeObject>>();
             
             var fakeObject = new FakeObject();
@@ -112,7 +112,7 @@ namespace Persitence.StoredProcedureMappingTests
         public void TestFindCollection()
         {
             var mapperDictionary = new MapperDictionary();
-            var fakeSearchCriteria = new Mock<IPersistenceCollectionSearcher>();
+            var fakeSearchCriteria = new Mock<IPersistenceCollectionSearcher<FakeObject>>();
             var mapper = new Mock<IStoredProcedureMapper<FakeObject>>();
             var fakeCollection = new Queue<FakeObject>();
             var fakeObject1 = new FakeObject();
