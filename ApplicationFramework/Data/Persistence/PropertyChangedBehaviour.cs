@@ -14,11 +14,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
     using Microsoft.Practices.Unity.InterceptionExtension;
 
     /// <summary>
-    /// This handler is used in direct conjunction with a Unity <c>PolicyDefintion</c> which
-    /// allows Unity to specify that only property setters
-    /// will be intercepted using this CallHandler.
-    /// It makes auto properties fire the NotifyChanged() method
-    /// on the target object when the property is set.
+    /// This interception behaviour should be added to an object realising <see cref="INotifyPropertyChanged"/>.
     /// </summary>
     public class PropertyChangedBehaviour : IInterceptionBehavior
     {
