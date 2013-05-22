@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AssemblyInfo.cs" company="James Dibble">
+// <copyright file="IMessage.cs" company="James Dibble">
 //   Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace JamesDibble.ServiceBus.Queueing
     public interface IMessage
     {
         /// <summary>
-        /// The serialised values to be put in the queue.
+        /// Gets the serialised values to be put in the queue.
         /// </summary>
         string Content { get; }
     }

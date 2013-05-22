@@ -84,6 +84,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queueing.SqlLite", "Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queueing.Msmq", "ServiceBus\Queueing\Queueing.Msmq\Queueing.Msmq.csproj", "{69BD6F98-3C1E-497D-B4EC-D0AABF292856}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queueing", "ServiceBus\Queueing\Queueing\Queueing.csproj", "{446A9C7B-1BC3-4796-B994-473B49A778B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +152,10 @@ Global
 		{69BD6F98-3C1E-497D-B4EC-D0AABF292856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69BD6F98-3C1E-497D-B4EC-D0AABF292856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69BD6F98-3C1E-497D-B4EC-D0AABF292856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446A9C7B-1BC3-4796-B994-473B49A778B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446A9C7B-1BC3-4796-B994-473B49A778B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446A9C7B-1BC3-4796-B994-473B49A778B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446A9C7B-1BC3-4796-B994-473B49A778B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +182,7 @@ Global
 		{9CFDE7D7-C7B5-4003-BCD6-FCA9FB565DC7} = {CBA8A6D0-E118-433A-86D6-14626BA85E84}
 		{181859CD-0F55-4610-9182-37E46D60FB5A} = {7BB722EA-81E1-4586-BD54-9E4539162A82}
 		{69BD6F98-3C1E-497D-B4EC-D0AABF292856} = {7BB722EA-81E1-4586-BD54-9E4539162A82}
+		{446A9C7B-1BC3-4796-B994-473B49A778B6} = {7BB722EA-81E1-4586-BD54-9E4539162A82}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
