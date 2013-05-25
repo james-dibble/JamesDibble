@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,7 +60,7 @@
     <Compile Include="IUniqueObject.cs" />
     <Compile Include="PersistenceCollectionSearcher.cs" />
     <Compile Include="PersistenceSearcher.cs" />
-    <Compile Include="PropertyChangedBehaviour.cs" />
+    <Compile Include="PropertyChangedBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniqueObject.cs" />
   </ItemGroup>

@@ -6,6 +6,7 @@
 namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMapping
 {
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Implementing classes define methods for mapping SQL Stored Procedures
@@ -80,6 +81,8 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
     /// <summary>
     /// Do not realise this interface.  Use <see cref="IStoredProcedureMapper{T}"/>.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces",
+        Justification = "This is is a non generic interface to be used in dictionary type arguments.")]
     public interface IStoredProcedureMapper
     {
     }

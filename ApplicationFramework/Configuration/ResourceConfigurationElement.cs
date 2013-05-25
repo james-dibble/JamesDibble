@@ -28,7 +28,7 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// Gets the type.
         /// </summary>
         [ConfigurationProperty("resourceType", IsKey = true, IsRequired = true)]
-        public object Type
+        public object ResourceType
         {
             get
             {

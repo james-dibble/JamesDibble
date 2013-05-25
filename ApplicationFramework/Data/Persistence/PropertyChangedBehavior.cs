@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PropertyChangedBehaviour.cs" company="James Dibble">
+// <copyright file="PropertyChangedBehavior.cs" company="James Dibble">
 //    Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -8,22 +8,24 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
 
     using Microsoft.Practices.Unity.InterceptionExtension;
+    using Microsoft.Practices.Unity.Utility;
 
     /// <summary>
     /// This interception behaviour should be added to an object realising <see cref="INotifyPropertyChanged"/>.
     /// </summary>
-    public class PropertyChangedBehaviour : IInterceptionBehavior
+    public class PropertyChangedBehavior : IInterceptionBehavior
     {
         private static readonly MethodInfo AddEventMethodInfo =
             typeof(INotifyPropertyChanged).GetEvent("PropertyChanged").GetAddMethod();
 
         private static readonly MethodInfo RemoveEventMethodInfo =
             typeof(INotifyPropertyChanged).GetEvent("PropertyChanged").GetRemoveMethod();
-        
+
         /// <summary>
         /// Gets a value indicating whether this behaviour will actually do anything when invoked.
         /// </summary>
@@ -32,7 +34,13 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         ///             do anything (for example, PIAB where no policies match) then the interception
         ///             mechanism can be skipped completely.
         /// </remarks>
-        public bool WillExecute { get; private set; }
+        public bool WillExecute
+        {
+            get
+            {
+                return false;
+            }
+        }
 
         /// <summary>
         /// Implement this method to execute your behaviour processing.
@@ -41,16 +49,23 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         /// <returns>
         /// Return value from the target.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is."), 
+        SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1",
+            Justification = "I is.")]
         public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
         {
+            Guard.ArgumentNotNull(input, "input");
+            Guard.ArgumentNotNull(getNext, "getNext");
+
             if (input.MethodBase == AddEventMethodInfo)
             {
-                return AddEventSubscription(input, getNext);
+                return AddEventSubscription(input);
             }
 
             if (input.MethodBase == RemoveEventMethodInfo)
             {
-                return RemoveEventSubscription(input, getNext);
+                return RemoveEventSubscription(input);
             }
 
             if (IsPropertySetter(input))
@@ -74,17 +89,17 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
 
         private static bool IsPropertySetter(IMethodInvocation input)
         {
-            return input.MethodBase.IsSpecialName && input.MethodBase.Name.StartsWith("set_");
+            return input.MethodBase.IsSpecialName && input.MethodBase.Name.StartsWith("set_", StringComparison.CurrentCulture);
         }
 
-        private static IMethodReturn AddEventSubscription(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
+        private static IMethodReturn AddEventSubscription(IMethodInvocation input)
         {
             var subscriber = (PropertyChangedEventHandler)input.Arguments[0];
             (input.Target as INotifyPropertyChanged).PropertyChanged += subscriber;
             return input.CreateMethodReturn(null);
         }
 
-        private static IMethodReturn RemoveEventSubscription(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
+        private static IMethodReturn RemoveEventSubscription(IMethodInvocation input)
         {
             var subscriber = (PropertyChangedEventHandler)input.Arguments[0];
             (input.Target as INotifyPropertyChanged).PropertyChanged -= subscriber;

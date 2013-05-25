@@ -6,8 +6,11 @@
 namespace JamesDibble.ApplicationFramework.Data.Persistence
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
+
+    using Microsoft.Practices.Unity.Utility;
 
     /// <summary>
     /// The persistence collection searcher.
@@ -27,9 +30,13 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         /// <param name="searcher">
         /// The searcher.
         /// </param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1",
+            Justification = "I is.")]
         public PersistenceCollectionSearcher(int limit, IPersistenceSearcher<T> searcher)
             : base(searcher.Predicate, searcher.Includes.ToArray())
         {
+            Guard.ArgumentNotNull(searcher, "searcher");
+
             this.Limit = limit;
         }
 

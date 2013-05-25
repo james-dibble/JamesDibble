@@ -9,6 +9,8 @@ namespace JamesDibble.UnitTesting.Extensions.System
 
     using global::System.Collections.Generic;
 
+    using global::System.Diagnostics.CodeAnalysis;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -95,7 +97,6 @@ namespace JamesDibble.UnitTesting.Extensions.System
         /// <summary>
         /// The test pluralise.
         /// </summary>
-        [TestMethod]
         public void TestPluraliseExpectS()
         {
             const string input = @"something";
@@ -110,7 +111,6 @@ namespace JamesDibble.UnitTesting.Extensions.System
         /// <summary>
         /// The test pluralise.
         /// </summary>
-        [TestMethod]
         public void TestPluraliseExpectIes()
         {
             const string input = @"somethingy";
@@ -125,7 +125,6 @@ namespace JamesDibble.UnitTesting.Extensions.System
         /// <summary>
         /// The test pluralise.
         /// </summary>
-        [TestMethod]
         public void TestPluraliseExpectOes()
         {
             const string input = @"potato";
@@ -139,16 +138,18 @@ namespace JamesDibble.UnitTesting.Extensions.System
         #endregion
 
         /// <summary>
-        /// The test normalise new lines.
+        /// The test normalize new lines.
         /// </summary>
         [TestMethod]
-        public void TestNormaliseNewLines()
+        public void TestNormalizeNewLines()
         {
             const string input = @"\n\r\n\n";
 
             var expected = string.Concat(Environment.NewLine, Environment.NewLine, Environment.NewLine, Environment.NewLine);
 
             var actual = input.NormalizeNewLines();
+
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>

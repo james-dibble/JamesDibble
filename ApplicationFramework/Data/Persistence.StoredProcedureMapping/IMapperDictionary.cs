@@ -5,11 +5,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMapping
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Implementing classes expose methods to map <see cref="IStoredProcedureMapper{T}"/> 
     /// to the <see cref="IPersistedObject"/>s they map.
     /// </summary>
-    public interface IMapperDictionary
+    public interface IMapperDictionary : IDictionary<Type, IStoredProcedureMapper>
     {
         /// <summary>
         /// Add a <see cref="IStoredProcedureMapper{T}"/> mapping.

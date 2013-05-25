@@ -18,7 +18,7 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// <summary>
         /// The map using type.
         /// </summary>
-        public enum MapUsingType
+        private enum MapUsingType
         {
             /// <summary>
             /// The raw path.
@@ -66,7 +66,7 @@ namespace JamesDibble.ApplicationFramework.Configuration
                         return path;
 
                     default:
-                        throw new InvalidOperationException(@"The value in the ""mapUsing"" element is unrecognized.");
+                        throw new InvalidOperationException(@"The value for mapping type element is unrecognized.");
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// Gets the map using.
         /// </summary>
         [ConfigurationProperty("mapUsing", IsRequired = true)]
-        public MapUsingType MapUsing
+        private MapUsingType MapUsing
         {
             get
             {

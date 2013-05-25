@@ -5,12 +5,13 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.ServiceBus.Queueing.Msmq
 {
+    using System;
     using System.Messaging;
 
     /// <summary>
     /// A queue manager for MSMQ transport.
     /// </summary>
-    public class MsmqQueueManager : IQueue
+    public class MsmqQueueManager : IQueueManager, IDisposable
     {
         private MessageQueue _queue;
 
@@ -21,9 +22,9 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// The name of the queue.
         /// </param>
         /// <returns>
-        /// The <see cref="IQueue"/>.
+        /// The <see cref="IQueueManager"/>.
         /// </returns>
-        public IQueue Setup(string name)
+        public IQueueManager Setup(string name)
         {
             if (MessageQueue.Exists(name))
             {
@@ -50,7 +51,7 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// Dequeue an <see cref="IMessage"/>.
         /// </summary>
         /// <returns>The top message in the queue.</returns>
-        public IMessage Recieve()
+        public IMessage Receive()
         {
             var recieved = this._queue.Receive();
             recieved.Formatter = new XmlMessageFormatter();
@@ -58,6 +59,29 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
             var message = new QueueMessage(recieved.Body.ToString());
 
             return message;
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose of any disposable fields of this <see cref="MsmqQueueManager"/>.
+        /// </summary>
+        /// <param name="disposing">
+        /// A value indicating whether this object is disposing.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this._queue.Dispose();
+            }
         }
     }
 }

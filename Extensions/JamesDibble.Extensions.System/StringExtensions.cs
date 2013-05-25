@@ -8,10 +8,13 @@ namespace System
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
     using System.Text.RegularExpressions;
+
+    using Microsoft.Practices.Unity.Utility;
 
     /// <summary>
     /// The string extensions.
@@ -21,29 +24,41 @@ namespace System
         /// <summary>
         /// The to url string.
         /// </summary>
-        /// <param name="stringToFix">
+        /// <param name="value">
         /// The string to fix.
         /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string ToUrlString(this string stringToFix)
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is."), 
+        SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "Uri is not applicable here.")]
+        public static string ToUrlString(this string value)
         {
-            return stringToFix.Replace(" ", "-").ToLower();
+            Guard.ArgumentNotNullOrEmpty(value, "value");
+
+            return value.Replace(" ", "-").ToLower(CultureInfo.CurrentCulture);
         }
 
         /// <summary>
         /// The URL string to reverse.
         /// </summary>
-        /// <param name="stringToReverse">
+        /// <param name="value">
         /// The string to reverse.
         /// </param>
         /// <returns>
         /// The <see cref="string"/> from once it came.
         /// </returns>
-        public static string FromUrlString(this string stringToReverse)
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is."), 
+        SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "Uri is not applicable here.")]
+        public static string FromUrlString(this string value)
         {
-            return stringToReverse.Replace("-", " ");
+            Guard.ArgumentNotNullOrEmpty(value, "value");
+
+            return value.Replace("-", " ");
         }
 
         /// <summary>
@@ -73,7 +88,12 @@ namespace System
         {
             var bytes = Encoding.UTF8.GetBytes(value);
 
-            return Convert.ToBase64String(new HMACSHA256().ComputeHash(bytes));
+            using (var hasher = new HMACSHA256())
+            {
+                var hashed = Convert.ToBase64String(hasher.ComputeHash(bytes));
+
+                return hashed;
+            }
         }
 
         /// <summary>
@@ -93,7 +113,12 @@ namespace System
             var bytes = Encoding.UTF8.GetBytes(value);
             var saltBytes = Encoding.UTF8.GetBytes(salt);
 
-            return Convert.ToBase64String(new HMACSHA256(saltBytes).ComputeHash(bytes));
+            using (var hasher = new HMACSHA256(saltBytes))
+            {
+                var hashed = Convert.ToBase64String(hasher.ComputeHash(bytes));
+
+                return hashed;
+            }
         }
 
         /// <summary>
@@ -125,8 +150,12 @@ namespace System
         /// <returns>
         /// The pluralised <see cref="string"/>.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is.")]
         public static string Pluralise(this string value, int count)
         {
+            Guard.ArgumentNotNullOrEmpty(value, "value");
+
             if (count == 1)
             {
                 return value;

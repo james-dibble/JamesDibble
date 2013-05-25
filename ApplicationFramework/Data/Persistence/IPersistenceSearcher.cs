@@ -7,6 +7,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
 
     /// <summary>
@@ -25,6 +26,8 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         /// <summary>
         /// Gets the objects that should also be loaded as part of the persistence query.
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Refactoring of this method is not possible.")]
         IEnumerable<Expression<Func<T, object>>> Includes { get; } 
     }
 }

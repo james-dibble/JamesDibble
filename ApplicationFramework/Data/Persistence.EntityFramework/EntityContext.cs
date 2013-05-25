@@ -3,17 +3,20 @@
 //    Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
+namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using JamesDibble.ApplicationFramework.Configuration;
     using JamesDibble.ApplicationFramework.Data.Persistence;
+
+    using Microsoft.Practices.Unity.Utility;
 
     /// <summary>
     /// A manager for Entity Framework persistence sources.
@@ -26,7 +29,7 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// <param name="configuration">
         /// The configuration.
         /// </param>
-        public EntityContext(IConfigurationManager configuration) : this(configuration.ConnectionString("default"))
+        public EntityContext(IConfigurationManager configuration) : this(ConfigurationManagerGuard(configuration).ConnectionString("default"))
         {
         }
 
@@ -55,8 +58,12 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// <returns>
         /// An <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is.")]
         public T Find<T>(IPersistenceSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
+            Guard.ArgumentNotNull(searchCriteria, "searchCriteria");
+
             var discoveredObject = this.GetSet<T>()
                 .Includes(searchCriteria.Includes.ToArray())
                 .SingleOrDefault(searchCriteria.Predicate);
@@ -76,8 +83,12 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         /// <returns>
         /// An <see cref="IEnumerable{T}"/> of <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is.")]
         public IEnumerable<T> Find<T>(IPersistenceCollectionSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
+            Guard.ArgumentNotNull(searchCriteria, "searchCriteria");
+
             var collection = this.GetSet<T>()
                 .Includes(searchCriteria.Includes.ToArray())
                 .Where(searchCriteria.Predicate);
@@ -149,6 +160,13 @@ namespace JamesDibble.ApplicaitonFramework.Data.Persistence.EntityFramework
         public void Commit()
         {
             this.SaveChanges();
+        }
+
+        private static IConfigurationManager ConfigurationManagerGuard(IConfigurationManager configuration)
+        {
+            Guard.ArgumentNotNull(configuration, "configuration");
+
+            return configuration;
         }
 
         private IQueryable<T> GetSet<T>() where T : class, IPersistedObject

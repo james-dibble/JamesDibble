@@ -7,10 +7,15 @@ namespace JamesDibble.ApplicationFramework.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
+
+    using Microsoft.Practices.Unity.Utility;
 
     /// <summary>
     /// The resource location configuration element collection.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface", 
+        Justification = "No thank you.  I don't need any more functionality from my collection.")]
     [ConfigurationCollection(typeof(ResourceConfigurationElement))]
     public class ResourceLocationConfigurationElementCollection : ConfigurationElementCollection
     {
@@ -72,9 +77,13 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// true if the element exists in the collection; otherwise, false. The default is false.
         /// </returns>
         /// <param name="elementName">The name of the element to verify. </param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is.")]
         protected override bool IsElementName(string elementName)
         {
-            return elementName.Equals(this.ElementName, StringComparison.InvariantCultureIgnoreCase);
+            Guard.ArgumentNotNullOrEmpty(elementName, "elementName");
+
+            return elementName.Equals(this.ElementName, StringComparison.CurrentCultureIgnoreCase);
         }
 
         /// <summary>
@@ -97,7 +106,7 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// <param name="element">The <see cref="T:System.Configuration.ConfigurationElement"/> to return the key for. </param>
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((ResourceConfigurationElement)element).Type;
+            return ((ResourceConfigurationElement)element).ResourceType;
         }
     }
 }

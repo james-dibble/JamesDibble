@@ -7,20 +7,32 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
 
     /// <summary>
     /// The mapper dictionary.
     /// </summary>
-    public class MapperDictionary : IMapperDictionary
+    [Serializable]
+    public class MapperDictionary : Dictionary<Type, IStoredProcedureMapper>, IMapperDictionary
     {
-        private readonly IDictionary<Type, IStoredProcedureMapper> _internalDictionary;
-
         /// <summary>
         /// Initialises a new instance of the <see cref="MapperDictionary"/> class.
         /// </summary>
         public MapperDictionary()
         {
-            this._internalDictionary = new Dictionary<Type, IStoredProcedureMapper>();
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="MapperDictionary"/> class.
+        /// </summary>
+        /// <param name="info">
+        /// The info.
+        /// </param>
+        /// <param name="context">
+        /// The context.
+        /// </param>
+        protected MapperDictionary(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
 
         /// <summary>
@@ -34,7 +46,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </param>
         public void Add<T>(IStoredProcedureMapper<T> mapperForType) where T : class, IPersistedObject
         {
-            this._internalDictionary.Add(new KeyValuePair<Type, IStoredProcedureMapper>(typeof(T), mapperForType));
+            this.Add(typeof(T), mapperForType);
         }
 
         /// <summary>
@@ -48,7 +60,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </returns>
         public IStoredProcedureMapper<T> GetMapperForType<T>() where T : class, IPersistedObject
         {
-            return this._internalDictionary[typeof(T)] as IStoredProcedureMapper<T>;
+            return this[typeof(T)] as IStoredProcedureMapper<T>;
         }
     }
 }

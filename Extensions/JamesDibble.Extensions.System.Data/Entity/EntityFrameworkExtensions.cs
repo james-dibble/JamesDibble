@@ -5,8 +5,11 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace System.Data.Entity
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
+
+    using Microsoft.Practices.Unity.Utility;
 
     /// <summary>
     /// The entity framework extensions.
@@ -28,9 +31,13 @@ namespace System.Data.Entity
         /// <returns>
         /// The <see cref="IQueryable"/>.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1",
+            Justification = "I is.")]
         public static IQueryable<T> Includes<T>(
            this IQueryable<T> query, params Expression<Func<T, object>>[] includeProperties) where T : class
         {
+            Guard.ArgumentNotNull(includeProperties, "includeProperties");
+
             foreach (var property in includeProperties)
             {
                 query.Include(property).Load();

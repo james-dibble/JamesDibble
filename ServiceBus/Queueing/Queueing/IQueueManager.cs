@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IQueue.cs" company="James Dibble">
+// <copyright file="IQueueManager.cs" company="James Dibble">
 //   Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@ namespace JamesDibble.ServiceBus.Queueing
     /// <summary>
     /// Implementing classes wrap management of service bus queues.
     /// </summary>
-    public interface IQueue
+    public interface IQueueManager
     {
         /// <summary>
         /// Create a new queue with the given <paramref name="name"/>.
@@ -18,9 +18,9 @@ namespace JamesDibble.ServiceBus.Queueing
         /// The name of the queue.
         /// </param>
         /// <returns>
-        /// The <see cref="IQueue"/>.
+        /// The <see cref="IQueueManager"/>.
         /// </returns>
-        IQueue Setup(string name);
+        IQueueManager Setup(string name);
 
         /// <summary>
         /// Put the given <see cref="IMessage"/> on the queue for processing.
@@ -32,6 +32,6 @@ namespace JamesDibble.ServiceBus.Queueing
         /// Dequeue an <see cref="IMessage"/>.
         /// </summary>
         /// <returns>The top message in the queue.</returns>
-        IMessage Recieve();
+        IMessage Receive();
     }
 }
