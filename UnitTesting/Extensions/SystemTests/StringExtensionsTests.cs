@@ -97,6 +97,7 @@ namespace JamesDibble.UnitTesting.Extensions.System
         /// <summary>
         /// The test pluralise.
         /// </summary>
+        [TestMethod]
         public void TestPluraliseExpectS()
         {
             const string input = @"something";
@@ -111,6 +112,7 @@ namespace JamesDibble.UnitTesting.Extensions.System
         /// <summary>
         /// The test pluralise.
         /// </summary>
+        [TestMethod]
         public void TestPluraliseExpectIes()
         {
             const string input = @"somethingy";
@@ -125,6 +127,7 @@ namespace JamesDibble.UnitTesting.Extensions.System
         /// <summary>
         /// The test pluralise.
         /// </summary>
+        [TestMethod]
         public void TestPluraliseExpectOes()
         {
             const string input = @"potato";

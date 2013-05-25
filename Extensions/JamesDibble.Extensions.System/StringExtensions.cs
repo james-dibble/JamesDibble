@@ -72,7 +72,7 @@ namespace System
         /// </returns>
         public static string NormalizeNewLines(this string input)
         {
-            return Regex.Replace(input, "(\\n|\\\\n|\\r|\\\\r)+", Environment.NewLine, RegexOptions.IgnoreCase);
+            return Regex.Replace(input, "(\\n|\\\\n|\\r|\\\\r)", Environment.NewLine, RegexOptions.IgnoreCase);
         }
 
         /// <summary>
