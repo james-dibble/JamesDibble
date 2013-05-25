@@ -35,7 +35,7 @@
     <DocumentationFile>..\..\..\Assemblies\JamesDibble.ServiceBus.Queueing.Msmq.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\..\..\JamesDibble.pfx</AssemblyOriginatorKeyFile>
