@@ -26,14 +26,7 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// </returns>
         public IQueueManager Setup(string name)
         {
-            if (MessageQueue.Exists(name))
-            {
-                this._queue = new MessageQueue(name);
-            }
-            else
-            {
-                this._queue = MessageQueue.Create(name);
-            }
+            this._queue = MessageQueue.Exists(name) ? new MessageQueue(name) : MessageQueue.Create(name);
 
             return this;
         }

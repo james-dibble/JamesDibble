@@ -46,6 +46,7 @@
     <Reference Include="System.Messaging" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MsmqInstaller.cs" />
     <Compile Include="MsmqQueueManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

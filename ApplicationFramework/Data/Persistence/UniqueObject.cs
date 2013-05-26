@@ -25,9 +25,9 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         }
 
         /// <summary>
-        /// Gets unique identifier of this <see cref="object"/>.
+        /// Gets or sets the unique identifier of this <see cref="object"/>.
         /// </summary>
-        public T Id { get; private set; }
+        public T Id { get; set; }
 
         /// <summary>
         /// Set the unique identifier of this <see cref="IUniqueObject{T}"/>.

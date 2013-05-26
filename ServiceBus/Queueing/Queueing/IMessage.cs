@@ -6,10 +6,12 @@
 
 namespace JamesDibble.ServiceBus.Queueing
 {
+    using System.Runtime.Serialization;
+
     /// <summary>
     /// Implementing classes define messages that can be placed upon the service bus.
     /// </summary>
-    public interface IMessage
+    public interface IMessage : ISerializable
     {
         /// <summary>
         /// Gets the serialised values to be put in the queue.

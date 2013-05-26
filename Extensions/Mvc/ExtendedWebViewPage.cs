@@ -5,7 +5,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.Extensions.Mvc
 {
-    using System.IO;
     using System.Web.Mvc;
     using JamesDibble.ApplicationFramework.Configuration;
 
@@ -15,8 +14,8 @@ namespace JamesDibble.Extensions.Mvc
     /// <typeparam name="T">The type of the view data model.</typeparam>
     public abstract class ExtendedWebViewPage<T> : WebViewPage<T>
     {
+        private readonly IConfigurationManager _configuration;
         private string _pageTitle;
-        private IConfigurationManager _configuration;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ExtendedWebViewPage{T}"/> class.

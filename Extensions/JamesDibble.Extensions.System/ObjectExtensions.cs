@@ -29,12 +29,12 @@ namespace System
         /// </returns>
         public static T CopyTo<T>(this T baseObject, T reference)
         {
-            foreach (var pS in baseObject.GetType().GetProperties().Where(prop => prop.CanWrite))
+            foreach (var baseProperty in baseObject.GetType().GetProperties().Where(prop => prop.CanWrite))
             {
-                var s = pS;
-                foreach (var pT in reference.GetType().GetProperties().Where(pT => pT.Name == s.Name))
+                var savedCopy = baseProperty;
+                foreach (var referenceProperty in reference.GetType().GetProperties().Where(pT => pT.Name == savedCopy.Name))
                 {
-                    pT.GetSetMethod().Invoke(reference, new object[] { s.GetGetMethod().Invoke(baseObject, null) });
+                    referenceProperty.GetSetMethod().Invoke(reference, new object[] { savedCopy.GetGetMethod().Invoke(baseObject, null) });
                 }
             }
 

@@ -7,6 +7,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Runtime.Serialization;
 
     /// <summary>
@@ -53,14 +54,29 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// Find a <see cref="IStoredProcedureMapper{T}"/> for this given <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">
-        /// The type of the mapper being requested is wrong.
+        /// The type of the mapper being requested.
         /// </typeparam>
         /// <returns>
         /// The <see cref="IStoredProcedureMapper{T}"/> for this given <typeparamref name="T"/>.
         /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown if the <see cref="MapperDictionary"/> has no mapper defined for the given <typeparamref name="T"/>.
+        /// </exception>
         public IStoredProcedureMapper<T> GetMapperForType<T>() where T : class, IPersistedObject
         {
-            return this[typeof(T)] as IStoredProcedureMapper<T>;
+            try
+            {
+                return this[typeof(T)] as IStoredProcedureMapper<T>;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                throw new ArgumentOutOfRangeException(
+                    string.Format(
+                        CultureInfo.CurrentCulture, 
+                        "The MapperDictionary currently contains no mapper for the type {0}.", 
+                        typeof(T).FullName),
+                    ex);
+            }
         }
     }
 }

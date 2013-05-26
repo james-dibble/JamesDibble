@@ -46,7 +46,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
 
             var reader = mapper.GetSelectCommand(searchCriteria).ExecuteReader(CommandBehavior.SingleRow);
 
-            T populatedObject = null;
+            T populatedObject;
 
             using (reader)
             {
