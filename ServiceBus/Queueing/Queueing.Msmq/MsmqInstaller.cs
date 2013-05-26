@@ -6,9 +6,12 @@
 namespace JamesDibble.ServiceBus.Queueing.Msmq
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
+    using System.ServiceProcess;
 
     /// <summary>
     /// A helper class to determine whether MSMQ is currently active on the executing machine.  If it
@@ -16,6 +19,8 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
     /// </summary>
     public static class MsmqInstaller
     {
+        private static bool _msmqInstalled;
+
         /// <summary>
         /// Gets a value indicating whether MSMQ is installed.
         /// </summary>
@@ -23,9 +28,26 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         {
             get
             {
-                // TODO: Add this functionality.
-                return true;
+                if (_msmqInstalled)
+                {
+                    return true;
+                }
+
+                _msmqInstalled = DetermineMsmqStatus();
+
+                return _msmqInstalled;
             }
+        }
+
+        private static bool DetermineMsmqStatus()
+        {
+            var msmqService = ServiceController.GetServices().ToList().Find(o => o.ServiceName == "MSMQ");
+            if (msmqService != null)
+            {
+                return msmqService.Status == ServiceControllerStatus.Running;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -69,9 +91,9 @@ Please contact james@jdibble.co.uk.");
                 dsim.Start();
                 dsim.WaitForExit();
             }
-            catch (Win32Exception win32ex)
+            catch (Win32Exception win32Ex)
             {
-                ThrowDsimException(win32ex);
+                ThrowDsimException(win32Ex);
             }
             catch (InvalidOperationException iox)
             {
