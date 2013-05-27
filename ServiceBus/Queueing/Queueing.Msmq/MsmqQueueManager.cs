@@ -8,12 +8,30 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
     using System;
     using System.Messaging;
 
+    using JamesDibble.ServiceBus.Configuration;
+
     /// <summary>
     /// A queue manager for MSMQ transport.
     /// </summary>
     public class MsmqQueueManager : IQueueManager, IDisposable
     {
         private MessageQueue _queue;
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="MsmqQueueManager"/> class.
+        /// </summary>
+        /// <param name="configuration">
+        /// The static configuration for this <see cref="IQueueManager"/>.
+        /// </param>
+        public MsmqQueueManager(IServiceBusConfiguration configuration)
+        {
+            this.StaticConfiguration = configuration;
+        }
+
+        /// <summary>
+        /// Gets the configuration values as they are in the defined in the executing applications config file.
+        /// </summary>
+        public IServiceBusConfiguration StaticConfiguration { get; private set; }
 
         /// <summary>
         /// Create a new queue with the given <paramref name="name"/>.
@@ -26,6 +44,11 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// </returns>
         public IQueueManager Setup(string name)
         {
+            if (!MsmqInstaller.MsmqIsInstalled)
+            {
+                MsmqInstaller.ActivateMsmq();
+            }
+
             this._queue = MessageQueue.Exists(name) ? new MessageQueue(name) : MessageQueue.Create(name);
 
             return this;
@@ -35,23 +58,38 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// Put the given <see cref="IMessage"/> on the queue for processing.
         /// </summary>
         /// <param name="message">The message to add to the queue.</param>
-        public void Send(IMessage message)
+        public void Push(IMessage message)
         {
-            this._queue.Send(message);
+            this.Push(message, this.StaticConfiguration.DefaultTimeout);
+        }
+
+        /// <summary>
+        /// Put the given <see cref="IMessage"/> on the queue for processing.
+        /// </summary>
+        /// <param name="message">The message to add to the queue.</param>
+        /// <param name="timeout">How long this message should be kept before going stale.</param>
+        public void Push(IMessage message, TimeSpan timeout)
+        {
+            var msmqMessage = new Message(message);
+
+            try
+            {
+                msmqMessage.TimeToBeReceived = timeout;
+                this._queue.Send(msmqMessage);
+            }
+            finally
+            {
+                msmqMessage.Dispose();
+            }
         }
 
         /// <summary>
         /// Dequeue an <see cref="IMessage"/>.
         /// </summary>
         /// <returns>The top message in the queue.</returns>
-        public IMessage Receive()
+        public IMessage Pop()
         {
-            var recieved = this._queue.Receive();
-            recieved.Formatter = new XmlMessageFormatter();
-
-            var message = new QueueMessage(recieved.Body.ToString());
-
-            return message;
+            return null;
         }
 
         /// <summary>

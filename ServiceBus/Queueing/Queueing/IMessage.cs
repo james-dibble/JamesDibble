@@ -6,16 +6,15 @@
 
 namespace JamesDibble.ServiceBus.Queueing
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
 
     /// <summary>
     /// Implementing classes define messages that can be placed upon the service bus.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces",
+        Justification = "Marker interface may expand very soon.")]
     public interface IMessage : ISerializable
     {
-        /// <summary>
-        /// Gets the serialised values to be put in the queue.
-        /// </summary>
-        string Content { get; }
     }
 }
