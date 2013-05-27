@@ -45,9 +45,28 @@ namespace JamesDibble.ServiceBus.Queueing
         void Push(IMessage message, TimeSpan timeout);
 
         /// <summary>
-        /// Dequeue an <see cref="IMessage"/>.
+        /// Dequeue an <see cref="IMessage"/> waiting the default amount of time for a message.
         /// </summary>
-        /// <returns>The top message in the queue.</returns>
-        IMessage Pop();
+        /// <typeparam name="T">
+        /// The type of <see cref="IMessage"/> to receive.
+        /// </typeparam>
+        /// <returns>
+        /// The top message in the queue.
+        /// </returns>
+        T Pop<T>() where T : class, IMessage;
+
+        /// <summary>
+        /// Dequeue an <see cref="IMessage"/> with a specified timeout period.
+        /// </summary>
+        /// <param name="timeout">
+        /// How long to wait for a message.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of <see cref="IMessage"/> to receive.
+        /// </typeparam>
+        /// <returns>
+        /// The top message in the queue.
+        /// </returns>
+        T Pop<T>(TimeSpan timeout) where T : class, IMessage;
     }
 }

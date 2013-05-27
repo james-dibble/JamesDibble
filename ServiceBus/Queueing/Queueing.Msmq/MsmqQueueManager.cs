@@ -86,10 +86,37 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// <summary>
         /// Dequeue an <see cref="IMessage"/>.
         /// </summary>
-        /// <returns>The top message in the queue.</returns>
-        public IMessage Pop()
+        /// <typeparam name="T">
+        /// The type of <see cref="IMessage"/> to receive.
+        /// </typeparam>
+        /// <returns>
+        /// The top message in the queue.
+        /// </returns>
+        public T Pop<T>() where T : class, IMessage
         {
-            return null;
+            return this.Pop<T>(this.StaticConfiguration.DefaultTimeout);
+        }
+
+        /// <summary>
+        /// Dequeue an <see cref="IMessage"/> with a specified timeout period.
+        /// </summary>
+        /// <param name="timeout">
+        /// How long to wait for a message.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of <see cref="IMessage"/> to receive.
+        /// </typeparam>
+        /// <returns>
+        /// The top message in the queue.
+        /// </returns>
+        public T Pop<T>(TimeSpan timeout) where T : class, IMessage
+        {
+            var message = this._queue.Receive(timeout);
+
+            message.Formatter = new XmlMessageFormatter(new[] { typeof(T) });
+            var received = message.Body as T;
+
+            return received;
         }
 
         /// <summary>

@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3D1F310D-1C87-4F80-BCEA-668B1243C676}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestMsmqClient</RootNamespace>
-    <AssemblyName>TestMsmqClient</AssemblyName>
+    <RootNamespace>QueueingTests.Common</RootNamespace>
+    <AssemblyName>QueueingTests.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,26 +32,13 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestMessageDto.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceBus\Configuration\Configuration.csproj">
-      <Project>{A721808E-EE0A-460F-A12A-5E5387E15C46}</Project>
-      <Name>Configuration %28ServiceBus\Configuration%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceBus\Queueing\Queueing.Msmq\Queueing.Msmq.csproj">
-      <Project>{69BD6F98-3C1E-497D-B4EC-D0AABF292856}</Project>
-      <Name>Queueing.Msmq</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceBus\Queueing\Queueing\Queueing.csproj">
+    <ProjectReference Include="..\..\..\..\ServiceBus\Queueing\Queueing\Queueing.csproj">
       <Project>{446A9C7B-1BC3-4796-B994-473B49A778B6}</Project>
       <Name>Queueing %28ServiceBus\Queueing\Queueing%29</Name>
     </ProjectReference>

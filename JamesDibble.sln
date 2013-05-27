@@ -93,7 +93,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceBus", "ServiceBus", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Queueing", "Queueing", "{821F04F1-E443-49FC-94E7-17407CEDA484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMsmqClient", "TestMsmqClient\TestMsmqClient.csproj", "{3D1F310D-1C87-4F80-BCEA-668B1243C676}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMsmqClient", "IntegrationTests\ServiceBus\Queueing\TestMsmqClient\TestMsmqClient.csproj", "{3D1F310D-1C87-4F80-BCEA-668B1243C676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueingTests.Common", "IntegrationTests\ServiceBus\Queueing\QueueingTests.Common\QueueingTests.Common.csproj", "{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMsmqEventHandler", "IntegrationTests\ServiceBus\Queueing\TestMsmqEventHandler\TestMsmqEventHandler.csproj", "{4F8F2316-EA4B-447D-B8BD-4E53D3E1AD48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -169,6 +173,14 @@ Global
 		{3D1F310D-1C87-4F80-BCEA-668B1243C676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D1F310D-1C87-4F80-BCEA-668B1243C676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D1F310D-1C87-4F80-BCEA-668B1243C676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F8F2316-EA4B-447D-B8BD-4E53D3E1AD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F8F2316-EA4B-447D-B8BD-4E53D3E1AD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F8F2316-EA4B-447D-B8BD-4E53D3E1AD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F8F2316-EA4B-447D-B8BD-4E53D3E1AD48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -199,6 +211,8 @@ Global
 		{22D2E874-52FC-4D09-A8A7-AAACED12C100} = {E922A446-7186-4F6A-BFAB-7A48DF1ACB3F}
 		{821F04F1-E443-49FC-94E7-17407CEDA484} = {22D2E874-52FC-4D09-A8A7-AAACED12C100}
 		{3D1F310D-1C87-4F80-BCEA-668B1243C676} = {821F04F1-E443-49FC-94E7-17407CEDA484}
+		{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872} = {821F04F1-E443-49FC-94E7-17407CEDA484}
+		{4F8F2316-EA4B-447D-B8BD-4E53D3E1AD48} = {821F04F1-E443-49FC-94E7-17407CEDA484}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
