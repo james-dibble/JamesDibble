@@ -56,12 +56,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\ServiceBus\Configuration\Configuration.csproj">
-      <Project>{a721808e-ee0a-460f-a12a-5e5387e15c46}</Project>
-      <Name>Configuration %28ServiceBus\Configuration%29</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

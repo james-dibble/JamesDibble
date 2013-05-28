@@ -36,7 +36,7 @@ namespace TestMsmqClient
                                   RandomProperty = @"Yello somebody!"
                               };
 
-            queueManager.Setup(@".\Private$\TestMessageDtoQueue").Push(message, new TimeSpan(1, 0, 0));
+            queueManager.Setup(@".\Private$\TestMessageDtoQueue").Push(message, new TimeSpan(0, 0, 10));
         }
     }
 }

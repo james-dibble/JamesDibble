@@ -75,7 +75,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Configuration\Configuration.csproj">
       <Project>{02901128-926D-4282-900D-D921C2D8EDC9}</Project>
-      <Name>Configuration %28ApplicationFramework\Configuration%29</Name>
+      <Name>Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Persistence\Persistence.csproj">
       <Project>{4115485B-45E2-4BE7-9E6F-1B9661BF669A}</Project>

@@ -27,7 +27,7 @@ namespace TestMsmqEventHandler
         {
             var queueManager = new MsmqQueueManager(null);
 
-            var recievedMessage = queueManager.Setup(@".\Private$\TestMessageDtoQueue").Pop<TestMessageDto>(new TimeSpan(1, 0, 0));
+            var recievedMessage = queueManager.Setup(@".\Private$\TestMessageDtoQueue").Pop<TestMessageDto>(new TimeSpan(0, 0, 3));
 
             Console.Write("{1}{0}{2}{0}{3}", Environment.NewLine, recievedMessage.RandomProperty, recievedMessage.RandomDoubleProperty, recievedMessage.RandomIntegerProperty);
 

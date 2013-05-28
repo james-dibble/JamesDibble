@@ -66,7 +66,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\ApplicationFramework\Configuration\Configuration.csproj">
       <Project>{02901128-926d-4282-900d-d921c2d8edc9}</Project>
-      <Name>Configuration %28ApplicationFramework\Configuration%29</Name>
+      <Name>Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Extensions\Mvc\Mvc.csproj">
       <Project>{4502F0FC-328E-4C7E-B8C3-AC2985F48ABF}</Project>

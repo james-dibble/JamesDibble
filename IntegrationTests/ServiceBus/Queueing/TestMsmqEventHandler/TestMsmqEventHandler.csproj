@@ -49,10 +49,6 @@
       <Project>{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}</Project>
       <Name>QueueingTests.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\ServiceBus\Configuration\Configuration.csproj">
-      <Project>{A721808E-EE0A-460F-A12A-5E5387E15C46}</Project>
-      <Name>Configuration %28ServiceBus\Configuration%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\ServiceBus\Queueing\Queueing.Msmq\Queueing.Msmq.csproj">
       <Project>{69BD6F98-3C1E-497D-B4EC-D0AABF292856}</Project>
       <Name>Queueing.Msmq</Name>
