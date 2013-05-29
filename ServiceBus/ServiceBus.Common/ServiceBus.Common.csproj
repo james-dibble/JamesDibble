@@ -4,67 +4,42 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3D1F310D-1C87-4F80-BCEA-668B1243C676}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{A8AE9A0E-B0DA-440A-8ADD-00E042F0F3AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestMsmqClient</RootNamespace>
-    <AssemblyName>TestMsmqClient</AssemblyName>
+    <RootNamespace>JamesDibble.ServiceBus</RootNamespace>
+    <AssemblyName>JamesDibble.ServiceBus.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\Assemblies\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>..\..\Assemblies\JamesDibble.ServiceBus.Common.xml</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="IMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\ServiceBus\Queueing\Queueing.Msmq\Queueing.Msmq.csproj">
-      <Project>{69BD6F98-3C1E-497D-B4EC-D0AABF292856}</Project>
-      <Name>Queueing.Msmq</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\ServiceBus\Queueing\Queueing\Queueing.csproj">
-      <Project>{446A9C7B-1BC3-4796-B994-473B49A778B6}</Project>
-      <Name>Queueing %28ServiceBus\Queueing\Queueing%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\ServiceBus\ServiceBus.Common\ServiceBus.Common.csproj">
-      <Project>{a8ae9a0e-b0da-440a-8add-00e042f0f3af}</Project>
-      <Name>ServiceBus.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\ServiceBus\ServiceBus.Configuration\ServiceBus.Configuration.csproj">
-      <Project>{a721808e-ee0a-460f-a12a-5e5387e15c46}</Project>
-      <Name>ServiceBus.Configuration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\QueueingTests.Common\QueueingTests.Common.csproj">
-      <Project>{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}</Project>
-      <Name>QueueingTests.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

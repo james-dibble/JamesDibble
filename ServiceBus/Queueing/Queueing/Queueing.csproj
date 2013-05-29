@@ -49,7 +49,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMessage.cs" />
     <Compile Include="IQueueManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +61,16 @@
     <CodeAnalysisDictionary Include="..\..\..\CodeAnalysisDictionary.xml">
       <Link>CodeAnalysisDictionary.xml</Link>
     </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ServiceBus.Common\ServiceBus.Common.csproj">
+      <Project>{a8ae9a0e-b0da-440a-8add-00e042f0f3af}</Project>
+      <Name>ServiceBus.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ServiceBus.Configuration\ServiceBus.Configuration.csproj">
+      <Project>{a721808e-ee0a-460f-a12a-5e5387e15c46}</Project>
+      <Name>ServiceBus.Configuration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

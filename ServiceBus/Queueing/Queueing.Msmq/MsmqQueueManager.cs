@@ -25,13 +25,13 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// </param>
         public MsmqQueueManager(IServiceBusConfiguration configuration)
         {
-            this.StaticConfiguration = configuration;
+            this.Configuration = configuration;
         }
 
         /// <summary>
         /// Gets the configuration values as they are in the defined in the executing applications config file.
         /// </summary>
-        public IServiceBusConfiguration StaticConfiguration { get; private set; }
+        public IServiceBusConfiguration Configuration { get; private set; }
 
         /// <summary>
         /// Create a new queue with the given <paramref name="name"/>.
@@ -60,7 +60,7 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// <param name="message">The message to add to the queue.</param>
         public void Push(IMessage message)
         {
-            this.Push(message, this.StaticConfiguration.DefaultTimeout);
+            this.Push(message, this.Configuration.StaticConfiguration.DefaultTimeout);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace JamesDibble.ServiceBus.Queueing.Msmq
         /// </returns>
         public T Pop<T>() where T : class, IMessage
         {
-            return this.Pop<T>(this.StaticConfiguration.DefaultTimeout);
+            return this.Pop<T>(this.Configuration.StaticConfiguration.DefaultTimeout);
         }
 
         /// <summary>

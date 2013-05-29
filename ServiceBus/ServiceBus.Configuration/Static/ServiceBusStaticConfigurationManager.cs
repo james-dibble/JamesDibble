@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ServiceBusConfigurationManager.cs" company="James Dibble">
+// <copyright file="ServiceBusStaticConfigurationManager.cs" company="James Dibble">
 //    Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace JamesDibble.ServiceBus.Configuration
+namespace JamesDibble.ServiceBus.Configuration.Static
 {
     using System;
     using System.Configuration;
@@ -11,14 +11,14 @@ namespace JamesDibble.ServiceBus.Configuration
     /// <summary>
     /// The service bus configuration manager.
     /// </summary>
-    public class ServiceBusConfigurationManager : IServiceBusConfiguration
+    public class ServiceBusStaticConfigurationManager : IServiceBusStaticConfiguration
     {
         private readonly ServiceBusConfigurationSection _configuration;
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="ServiceBusConfigurationManager"/> class.
+        /// Initialises a new instance of the <see cref="ServiceBusStaticConfigurationManager"/> class.
         /// </summary>
-        public ServiceBusConfigurationManager()
+        public ServiceBusStaticConfigurationManager()
         {
             this._configuration =
                 ConfigurationManager.GetSection("ServiceBusConfiguration") as ServiceBusConfigurationSection;

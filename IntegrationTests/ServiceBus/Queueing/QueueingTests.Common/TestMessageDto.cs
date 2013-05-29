@@ -7,7 +7,7 @@ namespace QueueingTests.Common
 {
     using System;
     using System.Runtime.Serialization;
-
+    using JamesDibble.ServiceBus;
     using JamesDibble.ServiceBus.Queueing;
 
     [Serializable]

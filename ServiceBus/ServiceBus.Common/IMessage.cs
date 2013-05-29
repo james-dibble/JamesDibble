@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace JamesDibble.ServiceBus.Queueing
+namespace JamesDibble.ServiceBus
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;

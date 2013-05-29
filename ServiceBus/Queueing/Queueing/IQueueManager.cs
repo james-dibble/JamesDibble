@@ -18,7 +18,7 @@ namespace JamesDibble.ServiceBus.Queueing
         /// <summary>
         /// Gets the configuration values as they are in the defined in the executing applications config file.
         /// </summary>
-        IServiceBusConfiguration StaticConfiguration { get; }
+        IServiceBusConfiguration Configuration { get; }
 
         /// <summary>
         /// Create a new queue with the given <paramref name="name"/>.

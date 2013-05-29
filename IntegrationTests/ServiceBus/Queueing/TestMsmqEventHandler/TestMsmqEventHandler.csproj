@@ -45,6 +45,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ServiceBus\ServiceBus.Common\ServiceBus.Common.csproj">
+      <Project>{a8ae9a0e-b0da-440a-8add-00e042f0f3af}</Project>
+      <Name>ServiceBus.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\ServiceBus\ServiceBus.Configuration\ServiceBus.Configuration.csproj">
+      <Project>{a721808e-ee0a-460f-a12a-5e5387e15c46}</Project>
+      <Name>ServiceBus.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QueueingTests.Common\QueueingTests.Common.csproj">
       <Project>{0FAB8300-B468-4CC5-8D88-5B0D4FA8E872}</Project>
       <Name>QueueingTests.Common</Name>

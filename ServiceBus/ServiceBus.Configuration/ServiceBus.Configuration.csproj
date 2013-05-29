@@ -47,15 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServiceBusConfiguration.cs" />
+    <Compile Include="Static\IServiceBusStaticConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceBusConfigurationManager.cs" />
-    <Compile Include="ServiceBusConfigurationSection.cs" />
+    <Compile Include="Static\ServiceBusStaticConfigurationManager.cs" />
+    <Compile Include="Static\ServiceBusConfigurationSection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\JamesDibble.pfx">
       <Link>JamesDibble.pfx</Link>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

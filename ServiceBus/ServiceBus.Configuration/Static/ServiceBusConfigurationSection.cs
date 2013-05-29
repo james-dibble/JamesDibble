@@ -3,7 +3,7 @@
 //    Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace JamesDibble.ServiceBus.Configuration
+namespace JamesDibble.ServiceBus.Configuration.Static
 {
     using System;
     using System.Configuration;
