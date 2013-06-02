@@ -6,8 +6,8 @@
     <ProjectGuid>{A1BAF252-7EC1-4609-916D-A8082D901D3A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JamesDibble.UnitTesting.Extensions.MvcTests</RootNamespace>
-    <AssemblyName>JamesDibble.UnitTesting.Extensions.MvcTests</AssemblyName>
+    <RootNamespace>JamesDibble.UnitTesting.ApplicationFramework.Web.MvcTests</RootNamespace>
+    <AssemblyName>JamesDibble.UnitTesting.ApplicationFramework.Web.MvcTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq">
-      <HintPath>..\..\..\Dependencies\Moq.dll</HintPath>
+      <HintPath>..\..\..\..\Dependencies\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -64,11 +64,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ApplicationFramework\Configuration\Configuration.csproj">
+    <ProjectReference Include="..\..\..\..\ApplicationFramework\Configuration\Configuration.csproj">
       <Project>{02901128-926d-4282-900d-d921c2d8edc9}</Project>
       <Name>Configuration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Extensions\Mvc\Mvc.csproj">
+    <ProjectReference Include="..\..\..\..\ApplicationFramework\Web\Mvc\Mvc.csproj">
       <Project>{4502F0FC-328E-4C7E-B8C3-AC2985F48ABF}</Project>
       <Name>Mvc</Name>
     </ProjectReference>

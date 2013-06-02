@@ -3,11 +3,12 @@
 //    Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace JamesDibble.UnitTesting.Extensions.MvcTests
+namespace JamesDibble.UnitTesting.ApplicationFramework.Web.MvcTests
 {
     using JamesDibble.ApplicationFramework.Configuration;
-    using JamesDibble.Extensions.Mvc;
+    using JamesDibble.ApplicationFramework.Web.Mvc;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using Moq;
 
     /// <summary>

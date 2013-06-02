@@ -3,7 +3,7 @@
 //    Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace JamesDibble.Extensions.Mvc
+namespace JamesDibble.ApplicationFramework.Web.Mvc
 {
     using System.Web.Mvc;
     using JamesDibble.ApplicationFramework.Configuration;

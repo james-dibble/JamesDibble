@@ -7,8 +7,8 @@
     <ProjectGuid>{4502F0FC-328E-4C7E-B8C3-AC2985F48ABF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JamesDibble.Extensions.Mvc</RootNamespace>
-    <AssemblyName>JamesDibble.Extensions.Mvc</AssemblyName>
+    <RootNamespace>JamesDibble.ApplicationFramework.Web.Mvc</RootNamespace>
+    <AssemblyName>JamesDibble.ApplicationFramework.Web.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,7 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\Assemblies\Debug\JamesDibble.Extensions.Mvc.XML</DocumentationFile>
+    <DocumentationFile>..\..\Assemblies\Debug\JamesDibble.ApplicationFramework.Web.Mvc.xml</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -52,20 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ApplicationFramework\Configuration\Configuration.csproj">
+    <ProjectReference Include="..\..\Configuration\Configuration.csproj">
       <Project>{02901128-926d-4282-900d-d921c2d8edc9}</Project>
       <Name>Configuration</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\JamesDibble.pfx">
-      <Link>JamesDibble.pfx</Link>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\CodeAnalysisDictionary.xml">
-      <Link>CodeAnalysisDictionary.xml</Link>
-    </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
