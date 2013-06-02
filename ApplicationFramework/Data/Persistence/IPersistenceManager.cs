@@ -74,17 +74,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         void Remove<T>(T objectToRemove) where T : class, IPersistedObject;
 
         /// <summary>
-        /// Create an instance of <typeparamref name="T"/> and add it to the object graph if applicable.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The type of <see cref="IPersistedObject"/>.
-        /// </typeparam>
-        /// <returns>
-        /// The new instance of <typeparamref name="T"/>.
-        /// </returns>
-        T Create<T>() where T : class, IPersistedObject;
-
-        /// <summary>
         /// Save changes that have been added to the <see cref="IPersistenceManager"/>.
         /// </summary>
         void Commit();

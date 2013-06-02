@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityContext.cs" />
+    <Compile Include="EntityFrameworkPersistenceManager.cs" />
     <Compile Include="IEntityContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

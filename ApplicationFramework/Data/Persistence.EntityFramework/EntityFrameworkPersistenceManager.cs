@@ -1,34 +1,17 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StoredProcedureMappingContext.cs" company="James Dibble">
+// <copyright file="EntityFrameworkPersistenceManager.cs" company="James Dibble">
 //    Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMapping
+namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 {
-    using System;
     using System.Collections.Generic;
-    using System.Data;
 
     /// <summary>
-    /// A manager for persistence sources interacted with, with Stored Procedures.
+    /// A manager for persistence sources managed by the Entity Framework.
     /// </summary>
-    public sealed class StoredProcedureMappingContext : IStoredProcedureMappingContext
+    public class EntityFrameworkPersistenceManager : IPersistenceManager
     {
-        private readonly IMapperDictionary _mappers;
-        private readonly IList<IDbCommand> _commandsToCommit;
-
-        /// <summary>
-        /// Initialises a new instance of the <see cref="StoredProcedureMappingContext"/> class.
-        /// </summary>
-        /// <param name="mappers">
-        /// A list of the <see cref="IStoredProcedureMapper{T}"/>s that have been configured for this application.
-        /// </param>
-        public StoredProcedureMappingContext(IMapperDictionary mappers)
-        {
-            this._commandsToCommit = new List<IDbCommand>();
-            this._mappers = mappers;
-        }
-
         /// <summary>
         /// Find an <see cref="IPersistedObject"/>
         /// </summary>
@@ -43,20 +26,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </returns>
         public T Find<T>(IPersistenceSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
-            var mapper = this._mappers.GetMapperForType<T>();
-
-            var reader = mapper.GetSelectCommand(searchCriteria).ExecuteReader(CommandBehavior.SingleRow);
-
-            T populatedObject;
-
-            using (reader)
-            {
-                reader.Read();
-
-                populatedObject = mapper.PopulateObject(reader);
-            }
-
-            return populatedObject;
+            return null;
         }
 
         /// <summary>
@@ -73,20 +43,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </returns>
         public IEnumerable<T> Find<T>(IPersistenceCollectionSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
-            var mapper = this._mappers.GetMapperForType<T>();
-            var collection = new List<T>();
-
-            var reader = mapper.GetSelectCommand(searchCriteria).ExecuteReader();
-
-            using (reader)
-            {
-                while (reader.Read())
-                {
-                    collection.Add(mapper.PopulateObject(reader));
-                }
-            }
-
-            return collection;
+            yield break;
         }
 
         /// <summary>
@@ -100,9 +57,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </typeparam>
         public void Change<T>(T updatedObject) where T : class, IPersistedObject
         {
-            var command = this._mappers.GetMapperForType<T>().GetUpdateCommand(updatedObject);
-
-            this._commandsToCommit.Add(command);
         }
 
         /// <summary>
@@ -116,9 +70,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </typeparam>
         public void Add<T>(T newObject) where T : class, IPersistedObject
         {
-            var command = this._mappers.GetMapperForType<T>().GetInsertCommand(newObject);
-
-            this._commandsToCommit.Add(command);
         }
 
         /// <summary>
@@ -132,9 +83,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </typeparam>
         public void Remove<T>(T objectToRemove) where T : class, IPersistedObject
         {
-            var command = this._mappers.GetMapperForType<T>().GetDeleteCommand(objectToRemove);
-
-            this._commandsToCommit.Add(command);
         }
 
         /// <summary>
@@ -142,10 +90,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </summary>
         public void Commit()
         {
-            foreach (var command in this._commandsToCommit)
-            {
-                command.ExecuteNonQuery();
-            }
         }
     }
 }
