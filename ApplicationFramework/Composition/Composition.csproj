@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="IBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

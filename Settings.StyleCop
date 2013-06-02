@@ -4,6 +4,7 @@
     <StringProperty Name="Culture">en-GB</StringProperty>
     <CollectionProperty Name="RecognizedWords">
       <Value>actioned</Value>
+      <Value>Bootstrapper</Value>
       <Value>Dequeue</Value>
       <Value>eg</Value>
     </CollectionProperty>

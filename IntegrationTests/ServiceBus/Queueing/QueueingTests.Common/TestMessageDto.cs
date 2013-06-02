@@ -8,15 +8,26 @@ namespace QueueingTests.Common
     using System;
     using System.Runtime.Serialization;
     using JamesDibble.ServiceBus;
-    using JamesDibble.ServiceBus.Queueing;
 
+    /// <summary>
+    /// The test message DTO.
+    /// </summary>
     [Serializable]
     public class TestMessageDto : IMessage
     {
+        /// <summary>
+        /// Gets or sets the random property.
+        /// </summary>
         public string RandomProperty { get; set; }
 
+        /// <summary>
+        /// Gets or sets the random integer property.
+        /// </summary>
         public int RandomIntegerProperty { get; set; }
 
+        /// <summary>
+        /// Gets or sets the random double property.
+        /// </summary>
         public double RandomDoubleProperty { get; set; }
 
         /// <summary>
