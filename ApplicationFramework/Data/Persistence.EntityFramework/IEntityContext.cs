@@ -27,7 +27,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         DbSet<T> GetSet<T>() where T : class, IPersistedObject;
 
         /// <summary>
-        /// Execute <see cref="M:DbContext.SaveChanges"/> upon the object graph as it stands.
+        /// Execute <see cref="M:System.Data.Entity.DbContext.SaveChanges"/> upon the object graph as it stands.
         /// </summary>
         /// <returns>
         /// The number of objects written to the underlying database..
