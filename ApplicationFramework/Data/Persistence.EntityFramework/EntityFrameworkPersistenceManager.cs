@@ -6,12 +6,32 @@
 namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 {
     using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+
+    using Microsoft.Practices.Unity.Utility;
 
     /// <summary>
     /// A manager for persistence sources managed by the Entity Framework.
     /// </summary>
     public class EntityFrameworkPersistenceManager : IPersistenceManager
     {
+        private readonly IEntityContext _context;
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="EntityFrameworkPersistenceManager"/> class.
+        /// </summary>
+        /// <param name="context">
+        /// Inject an object set into the persistence manager.
+        /// </param>
+        public EntityFrameworkPersistenceManager(IEntityContext context)
+        {
+            this._context = context;
+        }
+
         /// <summary>
         /// Find an <see cref="IPersistedObject"/>
         /// </summary>
@@ -24,9 +44,18 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         /// <returns>
         /// An <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is.")]
         public T Find<T>(IPersistenceSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
-            return null;
+            Guard.ArgumentNotNull(searchCriteria, "searchCriteria");
+
+            var discoveredObject = this._context.GetSet<T>()
+                .AsNoTracking()
+                .Includes(searchCriteria.Includes.ToArray())
+                .SingleOrDefault(searchCriteria.Predicate);
+
+            return discoveredObject;
         }
 
         /// <summary>
@@ -41,9 +70,18 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         /// <returns>
         /// An <see cref="IEnumerable{T}"/> of <see cref="IPersistedObject"/> retrieved from the persistence source.
         /// </returns>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0",
+            Justification = "I is.")]
         public IEnumerable<T> Find<T>(IPersistenceCollectionSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
-            yield break;
+            Guard.ArgumentNotNull(searchCriteria, "searchCriteria");
+
+            var collection = this._context.GetSet<T>()
+                .AsNoTracking()
+                .Includes(searchCriteria.Includes.ToArray())
+                .Where(searchCriteria.Predicate);
+
+            return collection;
         }
 
         /// <summary>
@@ -57,6 +95,9 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         /// </typeparam>
         public void Change<T>(T updatedObject) where T : class, IPersistedObject
         {
+            this._context.GetSet<T>().Attach(updatedObject);
+            ((IObjectContextAdapter)this._context).ObjectContext.ObjectStateManager.ChangeObjectState(
+                updatedObject, EntityState.Modified);
         }
 
         /// <summary>
@@ -70,6 +111,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         /// </typeparam>
         public void Add<T>(T newObject) where T : class, IPersistedObject
         {
+            this._context.GetSet<T>().Add(newObject);
         }
 
         /// <summary>
@@ -83,6 +125,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         /// </typeparam>
         public void Remove<T>(T objectToRemove) where T : class, IPersistedObject
         {
+            this._context.GetSet<T>().Remove(objectToRemove);
         }
 
         /// <summary>
@@ -90,6 +133,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         /// </summary>
         public void Commit()
         {
+            this._context.SaveChanges();
         }
     }
 }

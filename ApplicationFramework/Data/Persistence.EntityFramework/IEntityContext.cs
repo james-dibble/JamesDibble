@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 {
-    using System.Diagnostics.CodeAnalysis;
+    using System.Data.Entity;
 
     using JamesDibble.ApplicationFramework.Data.Persistence;
 
@@ -13,9 +13,25 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
     /// Implementing classes define a manager for persistence sources managed
     /// by the Entity Framework.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces",
-        Justification = "This interface may expand in the future.")]
-    public interface IEntityContext : IPersistenceManager
+    public interface IEntityContext
     {
+        /// <summary>
+        /// Retrieve the object set for the type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The <see cref="IPersistedObject"/> to get the set of.
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="DbSet"/> in the current object graph.
+        /// </returns>
+        DbSet<T> GetSet<T>() where T : class, IPersistedObject;
+
+        /// <summary>
+        /// Execute <see cref="M:DbContext.SaveChanges"/> upon the object graph as it stands.
+        /// </summary>
+        /// <returns>
+        /// The number of objects written to the underlying database..
+        /// </returns>
+        int SaveChanges();
     }
 }
