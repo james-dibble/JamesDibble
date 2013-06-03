@@ -50,6 +50,7 @@
       <HintPath>..\..\..\Dependencies\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +63,9 @@
     <Compile Include="PersistenceSearcher.cs" />
     <Compile Include="PropertyChangedBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeMapping\Configuration\TypeMappingConfigurationCollection.cs" />
+    <Compile Include="TypeMapping\Configuration\TypeMappingConfigurationElement.cs" />
+    <Compile Include="TypeMapping\Configuration\TypeMappingConfigurationSection.cs" />
     <Compile Include="TypeMapping\ITypeMappingDictionary.cs" />
     <Compile Include="TypeMapping\TypeMappingDictionary.cs" />
     <Compile Include="UniqueObject.cs" />
