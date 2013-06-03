@@ -21,7 +21,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping
         /// The type of interface that the <typeparamref name="TConcrete" /> is implemented from.
         /// </typeparam>
         /// <typeparam name="TConcrete">
-        /// The type <see cref="TInterface"/> maps too.
+        /// The type <typeparamref name="TInterface"/> maps too.
         /// </typeparam>
         void Add<TInterface, TConcrete>() 
             where TInterface : class, IPersistedObject

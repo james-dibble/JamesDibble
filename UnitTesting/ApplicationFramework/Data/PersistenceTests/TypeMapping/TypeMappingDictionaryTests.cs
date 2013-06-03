@@ -19,6 +19,13 @@ namespace JamesDibble.UnitTesting.ApplicationFramework.Data.PersistenceTests.Typ
         private TypeMappingDictionary _target;
 
         /// <summary>
+        /// The FakeObject interface.
+        /// </summary>
+        public interface IFakeObject : IPersistedObject
+        {
+        }
+
+        /// <summary>
         /// The test start-up.
         /// </summary>
         [TestInitialize]
@@ -39,14 +46,7 @@ namespace JamesDibble.UnitTesting.ApplicationFramework.Data.PersistenceTests.Typ
 
             Assert.AreEqual(this._target[typeof(IFakeObject)], expected);
         }
-
-        /// <summary>
-        /// The FakeObject interface.
-        /// </summary>
-        public interface IFakeObject : IPersistedObject
-        {
-        }
-
+        
         /// <summary>
         /// The fake object.
         /// </summary>
