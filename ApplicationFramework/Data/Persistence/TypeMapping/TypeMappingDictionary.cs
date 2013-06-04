@@ -9,6 +9,9 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
+    using JamesDibble.ApplicationFramework.Configuration;
+    using JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping.Configuration;
+
     /// <summary>
     /// The type mapping dictionary.
     /// </summary>
@@ -48,6 +51,28 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping
         public void Add<TInterface, TConcrete>() where TInterface : class, IPersistedObject where TConcrete : class, TInterface
         {
             this.Add(typeof(TInterface), typeof(TConcrete));
+        }
+
+        /// <summary>
+        /// Clear the current dictionary and pull all the mappings from the executing applications
+        /// configuration file.
+        /// </summary>
+        /// <returns>The <see cref="ITypeMappingDictionary"/> as configured</returns>
+        public ITypeMappingDictionary PopulateFromConfiguration()
+        {
+            this.Clear();
+
+            var configuration = new ConfigurationManagerWrapper().GetSection<TypeMappingConfigurationSection>("TypeMappings");
+
+            foreach (TypeMappingConfigurationElement typeMapping in configuration.TypeMappings)
+            {
+                var interfaceType = Type.GetType(typeMapping.InterfaceType);
+                var concreteType = Type.GetType(typeMapping.ConcreteType);
+
+                this.Add(interfaceType, concreteType);
+            }
+
+            return this;
         }
     }
 }

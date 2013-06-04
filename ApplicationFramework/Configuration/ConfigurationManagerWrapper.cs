@@ -65,7 +65,9 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// </returns>
         public T GetSection<T>(string sectionName) where T : ConfigurationSection
         {
-            return ConfigurationManager.GetSection(sectionName) as T;
+            var section = ConfigurationManager.GetSection(sectionName) as T;
+            
+            return section;
         }
 
         /// <summary>

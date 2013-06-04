@@ -50,7 +50,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping.Configur
         /// <returns>
         /// The <see cref="TypeMappingConfigurationElement"/>.
         /// </returns>
-        public TypeMappingConfigurationElement Resource(string index)
+        public TypeMappingConfigurationElement TypeMapping(string index)
         {
             return (TypeMappingConfigurationElement)BaseGet(index);
         }

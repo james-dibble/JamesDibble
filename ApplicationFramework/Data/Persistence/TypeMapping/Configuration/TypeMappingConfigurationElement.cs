@@ -28,11 +28,11 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping.Configur
         /// Gets the base type.
         /// </summary>
         [ConfigurationProperty("interfaceType", IsKey = true, IsRequired = true)]
-        public object InterfaceType
+        public string InterfaceType
         {
             get
             {
-                return this["interfaceType"];
+                return (string)this["interfaceType"];
             }
         }
     }

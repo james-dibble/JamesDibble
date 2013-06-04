@@ -26,5 +26,12 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping
         void Add<TInterface, TConcrete>() 
             where TInterface : class, IPersistedObject
             where TConcrete : class, TInterface;
+
+        /// <summary>
+        /// Clear the current dictionary and pull all the mappings from the executing applications
+        /// configuration file.
+        /// </summary>
+        /// <returns>The <see cref="ITypeMappingDictionary"/> as configured</returns>
+        ITypeMappingDictionary PopulateFromConfiguration();
     }
 }

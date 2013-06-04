@@ -15,12 +15,12 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping.Configur
         /// <summary>
         /// Gets the type mappings.
         /// </summary>
-        [ConfigurationProperty("TypeMappings")]
+        [ConfigurationProperty("", IsDefaultCollection = true)]
         public TypeMappingConfigurationCollection TypeMappings
         {
             get
             {
-                return (TypeMappingConfigurationCollection)this["TypeMappings"];
+                return (TypeMappingConfigurationCollection)this[string.Empty];
             }
         }
     }
