@@ -24,6 +24,38 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         /// <summary>
         /// Initialises a new instance of the <see cref="PersistenceCollectionSearcher{T}"/> class.
         /// </summary>
+        /// <param name="predicate">
+        /// The predicate.
+        /// </param>
+        /// <param name="includeProperties">
+        /// The include properties.
+        /// </param>
+        public PersistenceCollectionSearcher(
+            Func<T, bool> predicate, params Expression<Func<T, object>>[] includeProperties)
+            : base(predicate, includeProperties)
+        {
+            this.Limit = -1;
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="PersistenceCollectionSearcher{T}"/> class.
+        /// </summary>
+        /// <param name="searcher">
+        /// The searcher.
+        /// </param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1",
+            Justification = "I is.")]
+        public PersistenceCollectionSearcher(IPersistenceSearcher<T> searcher)
+            : base(searcher.Predicate, searcher.Includes.ToArray())
+        {
+            Guard.ArgumentNotNull(searcher, "searcher");
+
+            this.Limit = -1;
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="PersistenceCollectionSearcher{T}"/> class.
+        /// </summary>
         /// <param name="limit">
         /// The maximum number of records to return.
         /// </param>

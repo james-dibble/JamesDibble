@@ -91,7 +91,6 @@ namespace JamesDibble.UnitTesting.ApplicationFramework.Web.MvcTests
         private class FakeChildClass : ExtendedWebViewPage<string>
         {
             internal FakeChildClass(IConfigurationManager manager)
-                : base(manager)
             {
             }
 

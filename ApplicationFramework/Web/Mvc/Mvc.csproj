@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Assemblies\Debug\</OutputPath>
+    <OutputPath>..\..\..\Assemblies\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,11 +26,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Assemblies\Debug\</OutputPath>
+    <OutputPath>..\..\..\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\Assemblies\Debug\JamesDibble.ApplicationFramework.Web.Mvc.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\Assemblies\JamesDibble.ApplicationFramework.Web.Mvc.XML</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -41,17 +41,24 @@
     <AssemblyOriginatorKeyFile>..\..\JamesDibble.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependancyInjectionControllerFactory.cs" />
     <Compile Include="ExtendedWebViewPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Composition\Composition.csproj">
+      <Project>{8d7494c0-b308-4fb5-ad50-c9d255895df6}</Project>
+      <Name>Composition</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Configuration\Configuration.csproj">
       <Project>{02901128-926d-4282-900d-d921c2d8edc9}</Project>
       <Name>Configuration</Name>

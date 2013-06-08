@@ -28,11 +28,11 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// Gets the type.
         /// </summary>
         [ConfigurationProperty("resourceType", IsKey = true, IsRequired = true)]
-        public object ResourceType
+        public string ResourceType
         {
             get
             {
-                return this["resourceType"];
+                return (string)this["resourceType"];
             }
         }
     }

@@ -16,6 +16,13 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         /// <summary>
         /// Initialises a new instance of the <see cref="UniqueObject{T}"/> class.
         /// </summary>
+        protected UniqueObject()
+        {
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="UniqueObject{T}"/> class.
+        /// </summary>
         /// <param name="id">
         /// The identifier of this <see cref="UniqueObject{T}"/>.
         /// </param>

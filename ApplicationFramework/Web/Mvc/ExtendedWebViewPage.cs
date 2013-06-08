@@ -15,17 +15,13 @@ namespace JamesDibble.ApplicationFramework.Web.Mvc
     public abstract class ExtendedWebViewPage<T> : WebViewPage<T>
     {
         private readonly IConfigurationManager _configuration;
-        private string _pageTitle;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ExtendedWebViewPage{T}"/> class.
         /// </summary>
-        /// <param name="configuration">
-        /// The configuration.
-        /// </param>
-        protected ExtendedWebViewPage(IConfigurationManager configuration)
+        protected ExtendedWebViewPage()
         {
-            this._configuration = configuration;
+            this._configuration = new ConfigurationManagerWrapper();
         }
 
         /// <summary>
@@ -35,20 +31,31 @@ namespace JamesDibble.ApplicationFramework.Web.Mvc
         {
             get
             {
-                return this._pageTitle;
+                return ViewBag.Title;
             }
 
             set
             {
                 var baseTitle = this.Configuration.BaseTitle;
-                this._pageTitle = string.Concat(baseTitle, value);
+                ViewBag.Title = string.Concat(baseTitle, value);
             }
         }
 
         /// <summary>
         /// Gets or sets the description for this <see cref="WebViewPage{T}"/>.
         /// </summary>
-        public string Description { get; set; }
+        public string Description
+        {
+            get
+            {
+                return ViewBag.Description;
+            }
+
+            set
+            {
+                ViewBag.Description = value;
+            }
+        }
 
         /// <summary>
         /// Gets the configuration.

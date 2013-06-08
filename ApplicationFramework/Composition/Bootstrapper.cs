@@ -15,7 +15,10 @@ namespace JamesDibble.ApplicationFramework.Composition
         /// <summary>
         /// Initialise the <see cref="IBootstrapper"/> and resolve dependencies.
         /// </summary>
-        public abstract void Startup();
+        /// <returns>
+        /// The <see cref="IContainer"/> configured by this method.
+        /// </returns>
+        public abstract IContainer Startup();
 
         /// <summary>
         /// Dispose of the <see cref="IBootstrapper" /> and the objects it manages and end 

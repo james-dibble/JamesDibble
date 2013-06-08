@@ -1,10 +1,7 @@
 ﻿namespace TypeMappingTests
 {
-    using System;
-
-    using JamesDibble.ApplicationFramework.Configuration;
     using JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping;
-    using JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping.Configuration;
+    using System;
 
     /// <summary>
     /// The program.

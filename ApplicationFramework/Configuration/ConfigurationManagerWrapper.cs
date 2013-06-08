@@ -83,7 +83,7 @@ namespace JamesDibble.ApplicationFramework.Configuration
         {
             var configurationSection = this.GetSection<ApplicationConfigurationSection>("applicationConfiguration").ResourceLocations;
 
-            return string.Concat(configurationSection.BasePath, configurationSection.Resource(type));
+            return string.Concat(configurationSection.BasePath, configurationSection.Resource(type).Path);
         }
     }
 }
