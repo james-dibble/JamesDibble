@@ -44,7 +44,8 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         /// <param name="typeMapping">
         /// Inject interface type mappings into the persistence source.
         /// </param>
-        public EntityContext(string connectionString, ITypeMappingDictionary typeMapping) : base(connectionString)
+        public EntityContext(string connectionString, ITypeMappingDictionary typeMapping)
+            : base(connectionString)
         {
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.LazyLoadingEnabled = false;
@@ -66,21 +67,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
             if (!typeof(T).IsInterface)
             {
                 return this.Set<T>();
-            }
-
-            var persistedObjectType = typeof(T);
-
-            persistedObjectType = this._typeMapping[persistedObjectType];
-
-            var method = this.GetType()
-                             .GetMethod("Set")
-                             .MakeGenericMethod(new[] { persistedObjectType });
-
-            var result = method.Invoke(this, null) as DbSet;
-
-            if (result != null)
-            {
-                return result.Cast<T>();
             }
 
             throw new ArgumentException(

@@ -12,8 +12,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using JamesDibble.ApplicationFramework.Data.Persistence.TypeMapping;
-
     using Microsoft.Practices.Unity.Utility;
 
     /// <summary>
