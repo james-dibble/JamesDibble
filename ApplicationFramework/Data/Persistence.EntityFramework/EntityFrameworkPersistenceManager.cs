@@ -51,9 +51,11 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
             Guard.ArgumentNotNull(searchCriteria, "searchCriteria");
 
             var discoveredObject = this._context.GetSet<T>()
-                .AsNoTracking()
                 .Includes(searchCriteria.Includes.ToArray())
-                .SingleOrDefault(searchCriteria.Predicate);
+                .Where(searchCriteria.Predicate)
+                .AsQueryable()
+                .AsNoTracking()
+                .SingleOrDefault();
 
             return discoveredObject;
         }
@@ -77,9 +79,10 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
             Guard.ArgumentNotNull(searchCriteria, "searchCriteria");
 
             var collection = this._context.GetSet<T>()
-                .AsNoTracking()
                 .Includes(searchCriteria.Includes.ToArray())
-                .Where(searchCriteria.Predicate);
+                .Where(searchCriteria.Predicate)
+                .AsQueryable()
+                .AsNoTracking();
 
             return collection;
         }
