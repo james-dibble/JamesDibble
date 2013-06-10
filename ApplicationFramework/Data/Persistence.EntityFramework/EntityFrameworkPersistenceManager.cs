@@ -79,10 +79,18 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
             Guard.ArgumentNotNull(searchCriteria, "searchCriteria");
 
             var collection = this._context.GetSet<T>()
-                .Includes(searchCriteria.Includes.ToArray())
-                .Where(searchCriteria.Predicate)
-                .AsQueryable()
-                .AsNoTracking();
+                .Includes(searchCriteria.Includes.ToArray());
+
+            if (searchCriteria.Predicate == null)
+            {
+                collection = collection.AsNoTracking();
+
+                return collection;
+            }
+
+            collection = collection.Where(searchCriteria.Predicate)
+                                   .AsQueryable()
+                                   .AsNoTracking();
 
             return collection;
         }

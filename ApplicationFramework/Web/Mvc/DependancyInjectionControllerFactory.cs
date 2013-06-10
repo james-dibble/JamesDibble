@@ -17,6 +17,7 @@ namespace JamesDibble.ApplicationFramework.Web.Mvc
     public class DependancyInjectionControllerFactory : IControllerFactory
     {
         private readonly IContainer _container;
+        private readonly DefaultControllerFactory _defaultControllerFactory;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="DependancyInjectionControllerFactory"/> class.
@@ -27,6 +28,7 @@ namespace JamesDibble.ApplicationFramework.Web.Mvc
         public DependancyInjectionControllerFactory(IContainer container)
         {
             this._container = container;
+            this._defaultControllerFactory = new DefaultControllerFactory();
         }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace JamesDibble.ApplicationFramework.Web.Mvc
             }
             catch
             {
-                return new DefaultControllerFactory().CreateController(requestContext, controllerName);
+                return this._defaultControllerFactory.CreateController(requestContext, controllerName);
             }
         }
 

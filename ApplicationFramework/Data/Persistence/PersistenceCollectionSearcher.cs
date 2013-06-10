@@ -24,6 +24,18 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         /// <summary>
         /// Initialises a new instance of the <see cref="PersistenceCollectionSearcher{T}"/> class.
         /// </summary>
+        /// <param name="includeProperties">
+        /// The include properties.
+        /// </param>
+        public PersistenceCollectionSearcher(params Expression<Func<T, object>>[] includeProperties)
+            : base(null, includeProperties)
+        {
+            this.Limit = -1;
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="PersistenceCollectionSearcher{T}"/> class.
+        /// </summary>
         /// <param name="predicate">
         /// The predicate.
         /// </param>
