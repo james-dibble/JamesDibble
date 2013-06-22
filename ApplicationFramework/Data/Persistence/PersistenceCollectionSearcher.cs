@@ -30,7 +30,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         public PersistenceCollectionSearcher(params Expression<Func<T, object>>[] includeProperties)
             : base(null, includeProperties)
         {
-            this.Limit = -1;
+            this.Limit = Constants.NoLimitQuery;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
             Func<T, bool> predicate, params Expression<Func<T, object>>[] includeProperties)
             : base(predicate, includeProperties)
         {
-            this.Limit = -1;
+            this.Limit = Constants.NoLimitQuery;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence
         {
             Guard.ArgumentNotNull(searcher, "searcher");
 
-            this.Limit = -1;
+            this.Limit = Constants.NoLimitQuery;
         }
 
         /// <summary>

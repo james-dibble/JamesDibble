@@ -6,7 +6,9 @@
 namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
 
     using JamesDibble.ApplicationFramework.Configuration;
     using JamesDibble.ApplicationFramework.Data.Persistence;
@@ -71,6 +73,18 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 
             throw new ArgumentException(
                 string.Format("A DbSet for the type {0} could not be created", typeof(T).Name));
+        }
+
+        /// <summary>
+        /// Execute <see cref="M:System.Data.Entity.DbContext.SaveChanges"/> upon the object graph as it stands.
+        /// </summary>
+        /// <returns>
+        /// The number of objects written to the underlying database..
+        /// </returns>
+        public override int SaveChanges()
+        {
+            this.ChangeTracker.DetectChanges();
+            return base.SaveChanges();
         }
 
         private static IConfigurationManager ConfigurationManagerGuard(IConfigurationManager configuration)

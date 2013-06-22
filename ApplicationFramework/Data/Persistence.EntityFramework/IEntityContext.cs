@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
 
     using JamesDibble.ApplicationFramework.Data.Persistence;

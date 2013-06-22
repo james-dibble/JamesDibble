@@ -6,9 +6,7 @@
 namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -52,10 +50,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 
             var discoveredObject = this._context.GetSet<T>()
                 .Includes(searchCriteria.Includes.ToArray())
-                .Where(searchCriteria.Predicate)
-                .AsQueryable()
-                .AsNoTracking()
-                .SingleOrDefault();
+                .SingleOrDefault(searchCriteria.Predicate);
 
             return discoveredObject;
         }
@@ -78,19 +73,17 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         {
             Guard.ArgumentNotNull(searchCriteria, "searchCriteria");
 
-            var collection = this._context.GetSet<T>()
-                .Includes(searchCriteria.Includes.ToArray());
+            IQueryable<T> collection = this._context.GetSet<T>().Includes(searchCriteria.Includes.ToArray());
 
-            if (searchCriteria.Predicate == null)
+            if (searchCriteria.Predicate != null)
             {
-                collection = collection.AsNoTracking();
-
-                return collection;
+                collection = collection.Where(searchCriteria.Predicate).AsQueryable();
             }
 
-            collection = collection.Where(searchCriteria.Predicate)
-                                   .AsQueryable()
-                                   .AsNoTracking();
+            if (searchCriteria.Limit != Constants.NoLimitQuery)
+            {
+                collection = collection.Take(searchCriteria.Limit);
+            }
 
             return collection;
         }
@@ -106,9 +99,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
         /// </typeparam>
         public void Change<T>(T updatedObject) where T : class, IPersistedObject
         {
-            this._context.GetSet<T>().Attach(updatedObject);
-            ((IObjectContextAdapter)this._context).ObjectContext.ObjectStateManager.ChangeObjectState(
-                updatedObject, EntityState.Modified);
         }
 
         /// <summary>

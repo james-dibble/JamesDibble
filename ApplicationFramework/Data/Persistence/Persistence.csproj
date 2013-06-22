@@ -54,6 +54,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="IPersistedObject.cs" />
     <Compile Include="IPersistenceCollectionSearcher.cs" />
     <Compile Include="IPersistenceManager.cs" />
