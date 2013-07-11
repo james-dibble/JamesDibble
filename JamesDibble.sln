@@ -121,7 +121,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeDomainModel", "Integrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JamesDibble.Extensions.System.Comparers", "Extensions\JamesDibble.Extensions.System.Comparers\JamesDibble.Extensions.System.Comparers.csproj", "{82A735CD-7E25-488A-A725-65A5CBEA2CB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Javascript", "Javascript\Javascript.csproj", "{0495029A-1808-433D-9463-1D3386D22A4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Javascript", "ApplicationFramework\Web\Javascript\Javascript.csproj", "{0495029A-1808-433D-9463-1D3386D22A4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
