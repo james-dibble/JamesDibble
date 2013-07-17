@@ -3,75 +3,82 @@
 //   Copyright 2012 James Dibble
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-$.fn.imageLoader = function(options) {
-
+(function ($) {
     'use strict';
 
-    var defaults = {
-        delay: 200,
-        dataAttribute: 'src',
-        preload: function() {
-        },
-        allImagesLoaded: function() {
-        },
-        imageLoaded: function() {
-        },
-    };
+    $.fn.imageLoader = function (options) {
 
-    options = $.extend(defaults, options);
+        var defaults = {
+            checkLoadedInterval: 200,
+            dataAttribute: 'src',
+            preload: function () {
+            },
+            allImagesLoaded: function () {
+            },
+            imageLoaded: function (image) {
+            },
+        };
+        var imageContainers = $(this);
+        var timer = null;
+        var imageSources = [];
+        var imageQueue = [];
 
-    var imageContainer = $(this),
-        images = [imageContainer.length],
-        loadedFlags = [imageContainer.length],
-        checkTimer = 300,
-        timer = null,
-        loadImages = function() {
+        var checkLoaded = function () {
 
-            var loadedImages = 0;
+            var newImageQueue = [];
 
-            $(images).each(function(index, image) {
-                if (!loadedFlags[index]) {
-                    if (image.complete) {
-                        loadedImages += 1;
+            $(imageQueue).each(function (index, image) {
 
-                        loadedFlags[index] = true;
+                if (image.complete) {
+                    var imageSource = unescape(image.src);
 
-                        var element = $(imageContainer[index]);
-                        var source = images[index].src;
+                    var matchingContainers = $.grep(imageContainers, function (container) {
+                        var dataVal = $(container).data(options.dataAttribute);
 
-                        if (element.is('img')) {
-                            element.attr('src', source);
+                        return dataVal === imageSource;
+                    });
+
+                    $(matchingContainers).each(function (containerIndex, container) {
+
+                        if ($(container).is('img')) {
+                            $(container).attr('src', imageSource);
                         } else {
-                            var url = ['url(\'', source, '\')'].join('');
-                            element.css({ 'background-image': url });
+                            var url = ['url(\'', imageSource, '\')'].join('');
+                            $(container).css({ 'background-image': url });
                         }
 
-                        options.imageLoaded(element);
-                    }
+                        options.imageLoaded($(container));
+                    });
                 } else {
-                    loadedImages += 1;
+                    newImageQueue.push(image);
                 }
             });
 
-            if (loadedImages >= images.length) {
-                allLoaded();
+            imageQueue = newImageQueue;
+
+            if (imageQueue.length === 0) {
+                clearInterval(timer);
+                options.allImagesLoaded();
+                return;
             }
         };
 
-    $(imageContainer).each(function(index, elm) {
-        loadedFlags[index] = false;
-        var source = $(elm).data(options.dataAttribute);
-        var image = new Image();
-        image.src = source;
-        images[index] = image;
-    });
+        options = $.extend(defaults, options);
 
-    timer = setInterval(loadImages, checkTimer);
+        $(imageContainers).each(function (index, imageElement) {
+            var imageSource = $(imageElement).data(options.dataAttribute);
 
-    function allLoaded() {
-        clearInterval(timer);
-        options.allImagesLoaded();
-        return;
-    }
-};
+            if (imageSources.indexOf(imageSource) !== -1) {
+                return;
+            }
+
+            imageSources.push(imageSource);
+
+            var image = new Image();
+            image.src = imageSource;
+            imageQueue.push(image);
+        });
+
+        timer = setInterval(checkLoaded, options.checkLoadedInterval);
+    };
+})(jQuery);
