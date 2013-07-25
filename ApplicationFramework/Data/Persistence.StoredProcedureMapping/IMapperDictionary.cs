@@ -18,10 +18,10 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// Add a <see cref="IStoredProcedureMapper{T}"/> mapping.
         /// </summary>
         /// <typeparam name="TMapped">
-        /// The type the given <typeparam name="TMapper" /> maps.
+        /// The type the given <typeparamref name="TMapper"/> maps.
         /// </typeparam>
         /// <typeparam name="TMapper">
-        /// The <see cref="IStoredProcedureMapper"/> the given <typeparam name="TMapper" /> maps.
+        /// The <see cref="IStoredProcedureMapper"/> the given <typeparamref name="TMapper" /> maps.
         /// </typeparam>
         void Add<TMapped, TMapper>() where TMapped : class, IPersistedObject where TMapper : IStoredProcedureMapper<TMapped>;
 

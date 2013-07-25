@@ -7,6 +7,11 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
 {
     using System.Data;
 
+    /// <summary>
+    /// A base class for <see cref="IStoredProcedureMapper{T}"/>s to inherit if they need a 
+    /// <see cref="IStoredProcedureMappingContext"/> to resolve related objects.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class StoredProcedureMapper<T> : IStoredProcedureMapper<T> where T : class, IPersistedObject
     {
         /// <summary>
