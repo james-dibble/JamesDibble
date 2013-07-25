@@ -12,18 +12,18 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
     /// Implementing classes expose methods to map <see cref="IStoredProcedureMapper{T}"/> 
     /// to the <see cref="IPersistedObject"/>s they map.
     /// </summary>
-    public interface IMapperDictionary : IDictionary<Type, IStoredProcedureMapper>
+    public interface IMapperDictionary : IDictionary<Type, Type>
     {
         /// <summary>
         /// Add a <see cref="IStoredProcedureMapper{T}"/> mapping.
         /// </summary>
-        /// <typeparam name="T">
-        /// The type this <see cref="IStoredProcedureMapper{T}"/> maps.
+        /// <typeparam name="TMapped">
+        /// The type the given <typeparam name="TMapper" /> maps.
         /// </typeparam>
-        /// <param name="mapperForType">
-        /// The <see cref="IStoredProcedureMapper{T}"/> for the given <typeparamref name="T"/>.
-        /// </param>
-        void Add<T>(IStoredProcedureMapper<T> mapperForType) where T : class, IPersistedObject;
+        /// <typeparam name="TMapper">
+        /// The <see cref="IStoredProcedureMapper"/> the given <typeparam name="TMapper" /> maps.
+        /// </typeparam>
+        void Add<TMapped, TMapper>() where TMapped : class, IPersistedObject where TMapper : IStoredProcedureMapper<TMapped>;
 
         /// <summary>
         /// Find a <see cref="IStoredProcedureMapper{T}"/> for this given <typeparamref name="T"/>.
@@ -34,6 +34,6 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// <returns>
         /// The <see cref="IStoredProcedureMapper{T}"/> for this given <typeparamref name="T"/>.
         /// </returns>
-        IStoredProcedureMapper<T> GetMapperForType<T>() where T : class, IPersistedObject; 
+        Type GetMapperForType<T>() where T : class, IPersistedObject; 
     }
 }

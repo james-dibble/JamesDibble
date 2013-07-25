@@ -7,7 +7,9 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Data;
+    using System.Linq;
 
     /// <summary>
     /// A manager for persistence sources interacted with, with Stored Procedures.
@@ -15,18 +17,36 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
     public sealed class StoredProcedureMappingContext : IStoredProcedureMappingContext
     {
         private readonly IMapperDictionary _mappers;
+        private readonly IDbConnection _connection;
         private readonly IList<IDbCommand> _commandsToCommit;
+        private readonly ICollection<IStoredProcedureMapper> _mapperCache;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="StoredProcedureMappingContext"/> class.
         /// </summary>
+        /// <param name="connection">The <see cref="IDbConnection"/> to execute against.</param>
         /// <param name="mappers">
         /// A list of the <see cref="IStoredProcedureMapper{T}"/>s that have been configured for this application.
         /// </param>
-        public StoredProcedureMappingContext(IMapperDictionary mappers)
+        public StoredProcedureMappingContext(IDbConnection connection, IMapperDictionary mappers)
         {
+            this._connection = connection;
             this._commandsToCommit = new List<IDbCommand>();
             this._mappers = mappers;
+            this._mapperCache = new Collection<IStoredProcedureMapper>();
+        }
+
+        private IDbConnection Connection
+        {
+            get
+            {
+                if (this._connection.State == ConnectionState.Closed)
+                {
+                    this._connection.Open();
+                }
+
+                return this._connection;
+            }
         }
 
         /// <summary>
@@ -43,9 +63,11 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </returns>
         public T Find<T>(IPersistenceSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
-            var mapper = this._mappers.GetMapperForType<T>();
+            var mapper = this.GetMapperForType<T>();
+            var command = mapper.GetSelectCommand(searchCriteria);
+            command.Connection = this.Connection;
 
-            var reader = mapper.GetSelectCommand(searchCriteria).ExecuteReader(CommandBehavior.SingleRow);
+            var reader = command.ExecuteReader(CommandBehavior.SingleRow);
 
             T populatedObject;
 
@@ -73,10 +95,13 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </returns>
         public IEnumerable<T> Find<T>(IPersistenceCollectionSearcher<T> searchCriteria) where T : class, IPersistedObject
         {
-            var mapper = this._mappers.GetMapperForType<T>();
+            var mapper = this.GetMapperForType<T>();
             var collection = new List<T>();
 
-            var reader = mapper.GetSelectCommand(searchCriteria).ExecuteReader();
+            var command = mapper.GetSelectCommand(searchCriteria);
+            command.Connection = this.Connection;
+
+            var reader = command.ExecuteReader();
 
             using (reader)
             {
@@ -100,7 +125,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </typeparam>
         public void Change<T>(T updatedObject) where T : class, IPersistedObject
         {
-            var command = this._mappers.GetMapperForType<T>().GetUpdateCommand(updatedObject);
+            var command = this.GetMapperForType<T>().GetUpdateCommand(updatedObject);
 
             this._commandsToCommit.Add(command);
         }
@@ -116,7 +141,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </typeparam>
         public void Add<T>(T newObject) where T : class, IPersistedObject
         {
-            var command = this._mappers.GetMapperForType<T>().GetInsertCommand(newObject);
+            var command = this.GetMapperForType<T>().GetInsertCommand(newObject);
 
             this._commandsToCommit.Add(command);
         }
@@ -132,7 +157,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// </typeparam>
         public void Remove<T>(T objectToRemove) where T : class, IPersistedObject
         {
-            var command = this._mappers.GetMapperForType<T>().GetDeleteCommand(objectToRemove);
+            var command = this.GetMapperForType<T>().GetDeleteCommand(objectToRemove);
 
             this._commandsToCommit.Add(command);
         }
@@ -144,8 +169,34 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         {
             foreach (var command in this._commandsToCommit)
             {
+                command.Connection = this.Connection;
                 command.ExecuteNonQuery();
             }
+
+            this._commandsToCommit.Clear();
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this._connection.Close();
+        }
+
+        private IStoredProcedureMapper<T> GetMapperForType<T>() where T : class, IPersistedObject
+        {
+            var mapperType = this._mappers.GetMapperForType<T>();
+
+            var mapper = this._mapperCache.FirstOrDefault(m => m.GetType() == mapperType);
+
+            if (mapper == null)
+            {
+                mapper = Activator.CreateInstance(mapperType, new object[] { this }, null) as IStoredProcedureMapper;
+                this._mapperCache.Add(mapper);
+            }
+
+            return mapper as IStoredProcedureMapper<T>;
         }
     }
 }

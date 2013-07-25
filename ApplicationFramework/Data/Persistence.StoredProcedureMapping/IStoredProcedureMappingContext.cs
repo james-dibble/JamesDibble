@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMapping
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
@@ -13,7 +14,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces",
         Justification = "This interface may grow in the future.")]
-    public interface IStoredProcedureMappingContext : IPersistenceManager
+    public interface IStoredProcedureMappingContext : IPersistenceManager, IDisposable
     { 
     }
 }

@@ -32,11 +32,12 @@ namespace Persitence.StoredProcedureMappingTests
             var mapper = new Mock<IStoredProcedureMapper<FakeObject>>();
             var command = new Mock<IDbCommand>();
             var fakeObject = new FakeObject();
+            var fakeConnection = new Mock<IDbConnection>();
 
             mapper.Setup(m => m.GetUpdateCommand(fakeObject)).Returns(command.Object);
-            mapperDictionary.Add(mapper.Object);
+            mapperDictionary.Add(typeof(FakeObject), mapper.Object.GetType());
 
-            var context = new StoredProcedureMappingContext(mapperDictionary);
+            var context = new StoredProcedureMappingContext(fakeConnection.Object, mapperDictionary);
             context.Change(fakeObject);
         }
 
@@ -50,11 +51,12 @@ namespace Persitence.StoredProcedureMappingTests
             var mapper = new Mock<IStoredProcedureMapper<FakeObject>>();
             var command = new Mock<IDbCommand>();
             var fakeObject = new FakeObject();
+            var fakeConnection = new Mock<IDbConnection>();
 
             mapper.Setup(m => m.GetInsertCommand(fakeObject)).Returns(command.Object);
-            mapperDictionary.Add(mapper.Object);
+            mapperDictionary.Add(typeof(FakeObject), mapper.Object.GetType());
 
-            var context = new StoredProcedureMappingContext(mapperDictionary);
+            var context = new StoredProcedureMappingContext(fakeConnection.Object, mapperDictionary);
             context.Add(fakeObject);
         }
 
@@ -68,11 +70,12 @@ namespace Persitence.StoredProcedureMappingTests
             var mapper = new Mock<IStoredProcedureMapper<FakeObject>>();
             var command = new Mock<IDbCommand>();
             var fakeObject = new FakeObject();
+            var fakeConnection = new Mock<IDbConnection>();
 
             mapper.Setup(m => m.GetDeleteCommand(fakeObject)).Returns(command.Object);
-            mapperDictionary.Add(mapper.Object);
+            mapperDictionary.Add(typeof(FakeObject), mapper.Object.GetType());
 
-            var context = new StoredProcedureMappingContext(mapperDictionary);
+            var context = new StoredProcedureMappingContext(fakeConnection.Object, mapperDictionary);
             context.Remove(fakeObject);
         }
 
@@ -85,7 +88,7 @@ namespace Persitence.StoredProcedureMappingTests
             var mapperDictionary = new MapperDictionary();
             var fakeSearchCriteria = new Mock<IPersistenceSearcher<FakeObject>>();
             var mapper = new Mock<IStoredProcedureMapper<FakeObject>>();
-            
+            var fakeConnection = new Mock<IDbConnection>();
             var fakeObject = new FakeObject();
             var fakeReader = new Mock<IDataReader>();
             var readToggle = true;
@@ -98,9 +101,9 @@ namespace Persitence.StoredProcedureMappingTests
 
             mapper.Setup(m => m.GetSelectCommand(fakeSearchCriteria.Object)).Returns(command.Object);
             mapper.Setup(m => m.PopulateObject(fakeReader.Object)).Returns(fakeObject);
-            mapperDictionary.Add(mapper.Object);
+            mapperDictionary.Add(typeof(FakeObject), mapper.Object.GetType());
 
-            var actual = new StoredProcedureMappingContext(mapperDictionary).Find<FakeObject>(fakeSearchCriteria.Object);
+            var actual = new StoredProcedureMappingContext(fakeConnection.Object, mapperDictionary).Find<FakeObject>(fakeSearchCriteria.Object);
 
             Assert.AreEqual(fakeObject, actual);
         }
@@ -117,6 +120,7 @@ namespace Persitence.StoredProcedureMappingTests
             var fakeCollection = new Queue<FakeObject>();
             var fakeObject1 = new FakeObject();
             var fakeObject2 = new FakeObject();
+            var fakeConnection = new Mock<IDbConnection>();
 
             fakeCollection.Enqueue(fakeObject1);
             fakeCollection.Enqueue(fakeObject2);
@@ -130,10 +134,10 @@ namespace Persitence.StoredProcedureMappingTests
 
             mapper.Setup(m => m.GetSelectCommand(fakeSearchCriteria.Object)).Returns(fakeCommand.Object);
             mapper.Setup(m => m.PopulateObject(fakeReader.Object)).Returns(fakeCollection.Dequeue);
-            
-            mapperDictionary.Add(mapper.Object);
 
-            var actual = new StoredProcedureMappingContext(mapperDictionary).Find<FakeObject>(fakeSearchCriteria.Object);
+            mapperDictionary.Add(typeof(FakeObject), mapper.Object.GetType());
+
+            var actual = new StoredProcedureMappingContext(fakeConnection.Object, mapperDictionary).Find<FakeObject>(fakeSearchCriteria.Object);
 
             Assert.AreEqual(fakeObject1, actual.ElementAt(0));
             Assert.AreEqual(fakeObject2, actual.ElementAt(1));

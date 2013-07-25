@@ -14,7 +14,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
     /// The mapper dictionary.
     /// </summary>
     [Serializable]
-    public class MapperDictionary : Dictionary<Type, IStoredProcedureMapper>, IMapperDictionary
+    public class MapperDictionary : Dictionary<Type, Type>, IMapperDictionary
     {
         /// <summary>
         /// Initialises a new instance of the <see cref="MapperDictionary"/> class.
@@ -39,15 +39,15 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// <summary>
         /// Add a <see cref="IStoredProcedureMapper{T}"/> mapping.
         /// </summary>
-        /// <typeparam name="T">
-        /// Do not The type this <see cref="IStoredProcedureMapper{T}"/> maps.
+        /// <typeparam name="TMapped">
+        /// The type the given <typeparam name="TMapper" /> maps.
         /// </typeparam>
-        /// <param name="mapperForType">
-        /// The <see cref="IStoredProcedureMapper{T}"/> for the given <typeparamref name="T"/>.
-        /// </param>
-        public void Add<T>(IStoredProcedureMapper<T> mapperForType) where T : class, IPersistedObject
+        /// <typeparam name="TMapper">
+        /// The <see cref="IStoredProcedureMapper"/> the given <typeparam name="TMapper" /> maps.
+        /// </typeparam>
+        public void Add<TMapped, TMapper>() where TMapped : class, IPersistedObject where TMapper : IStoredProcedureMapper<TMapped>
         {
-            this.Add(typeof(T), mapperForType);
+            this.Add(typeof(TMapped), typeof(TMapper));
         }
 
         /// <summary>
@@ -62,11 +62,11 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.StoredProcedureMappi
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown if the <see cref="MapperDictionary"/> has no mapper defined for the given <typeparamref name="T"/>.
         /// </exception>
-        public IStoredProcedureMapper<T> GetMapperForType<T>() where T : class, IPersistedObject
+        public Type GetMapperForType<T>() where T : class, IPersistedObject
         {
             try
             {
-                return this[typeof(T)] as IStoredProcedureMapper<T>;
+                return this[typeof(T)];
             }
             catch (ArgumentOutOfRangeException ex)
             {

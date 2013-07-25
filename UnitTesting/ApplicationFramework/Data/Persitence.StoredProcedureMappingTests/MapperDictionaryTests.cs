@@ -10,8 +10,6 @@ namespace Persitence.StoredProcedureMappingTests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Moq;
-
     /// <summary>
     /// The mapper dictionary tests.
     /// </summary>
@@ -24,14 +22,8 @@ namespace Persitence.StoredProcedureMappingTests
         [TestMethod]
         public void TestDictionary()
         {
-            var fakeMapper = new Mock<IStoredProcedureMapper<FakeObject>>();
-
             var dictionary = new MapperDictionary();
-            dictionary.Add<FakeObject>(fakeMapper.Object);
-
-            var actual = dictionary.GetMapperForType<FakeObject>();
-
-            Assert.AreEqual(fakeMapper.Object, actual);
+            dictionary.Add<FakeObject, IStoredProcedureMapper<FakeObject>>();
         }
 
         /// <summary>

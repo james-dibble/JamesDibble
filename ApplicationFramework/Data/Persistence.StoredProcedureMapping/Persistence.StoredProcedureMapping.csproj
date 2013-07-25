@@ -55,6 +55,7 @@
     <Compile Include="IStoredProcedureMappingContext.cs" />
     <Compile Include="MapperDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredProcedureMapper.cs" />
     <Compile Include="StoredProcedureMappingContext.cs" />
   </ItemGroup>
   <ItemGroup>
