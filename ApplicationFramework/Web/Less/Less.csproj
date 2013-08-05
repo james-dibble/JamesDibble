@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0495029A-1808-433D-9463-1D3386D22A4A}</ProjectGuid>
+    <ProjectGuid>{BBBCC98B-BAF3-4576-8CB3-E9AB61C9D1F6}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JamesDibble.ApplicationFramework.Web.Javascript</RootNamespace>
-    <AssemblyName>JamesDibble.ApplicationFramework.Web.Javascript</AssemblyName>
+    <RootNamespace>JamesDibble.ApplicationFramework.Web.Less</RootNamespace>
+    <AssemblyName>JamesDibble.ApplicationFramework.Web.Less</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -41,15 +41,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="imageLoader.js" />
-    <Content Include="imageLoader.min.js">
-      <DependentUpon>imageLoader.js</DependentUpon>
+    <Content Include="StickyFooter.css">
+      <DependentUpon>StickyFooter.less</DependentUpon>
     </Content>
-    <Content Include="scrollToTop.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="imageLoader.min.js.map">
-      <DependentUpon>imageLoader.js</DependentUpon>
+    <Content Include="StickyFooter.less" />
+    <Content Include="StickyFooter.min.css">
+      <DependentUpon>StickyFooter.less</DependentUpon>
     </Content>
   </ItemGroup>
   <PropertyGroup>
@@ -67,7 +64,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6024/</IISUrl>
+          <IISUrl>http://localhost:32242/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
