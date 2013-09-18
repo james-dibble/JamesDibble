@@ -22,6 +22,11 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// Gets a configured value for the title of a window.
         /// </summary>
         string BaseTitle { get; }
+        
+        /// <summary>
+        /// Gets a value indicating whether to use minified resources.
+        /// </summary>
+        bool UseMinified { get; }
 
         /// <summary>
         /// Get a named connection.

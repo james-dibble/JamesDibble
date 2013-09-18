@@ -32,6 +32,18 @@ namespace JamesDibble.ApplicationFramework.Configuration
         }
 
         /// <summary>
+        /// Gets a value indicating whether to use minified sources if available for a resource.
+        /// </summary>
+        [ConfigurationProperty("useMinified")]
+        public bool UseMinified
+        {
+            get
+            {
+                return (bool)this["useMinified"];
+            }
+        }
+
+        /// <summary>
         /// Gets the type of the <see cref="T:System.Configuration.ConfigurationElementCollection"/>.
         /// </summary>
         /// <returns>

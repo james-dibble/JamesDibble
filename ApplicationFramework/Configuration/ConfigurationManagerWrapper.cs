@@ -5,14 +5,26 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace JamesDibble.ApplicationFramework.Configuration
 {
+    using System;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Linq;
 
     /// <summary>
     /// A wrapper for the <see cref="ConfigurationManager"/> class.
     /// </summary>
     public class ConfigurationManagerWrapper : IConfigurationManager
     {
+        private readonly ApplicationConfigurationSection _configuration;
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ConfigurationManagerWrapper"/> class.
+        /// </summary>
+        public ConfigurationManagerWrapper()
+        {
+            this._configuration = this.GetSection<ApplicationConfigurationSection>("applicationConfiguration");
+        }
+
         /// <summary>
         /// Gets the app settings collection.
         /// </summary>
@@ -27,13 +39,22 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// <summary>
         /// Gets a configured value for the title of a window.
         /// </summary>
-        public string BaseTitle 
+        public string BaseTitle
         {
             get
             {
-                var configurationSection = this.GetSection<ApplicationConfigurationSection>("applicationConfiguration");
+                return this._configuration.BaseTitle.Title;
+            }
+        }
 
-                return configurationSection.BaseTitle.Title;
+        /// <summary>
+        /// Gets a value indicating whether to use minified resources.
+        /// </summary>
+        public bool UseMinified
+        {
+            get
+            {
+                return this._configuration.ResourceLocations.UseMinified;
             }
         }
 
@@ -66,7 +87,7 @@ namespace JamesDibble.ApplicationFramework.Configuration
         public T GetSection<T>(string sectionName) where T : ConfigurationSection
         {
             var section = ConfigurationManager.GetSection(sectionName) as T;
-            
+
             return section;
         }
 
@@ -81,9 +102,11 @@ namespace JamesDibble.ApplicationFramework.Configuration
         /// </returns>
         public string ResourcePath(string type)
         {
-            var configurationSection = this.GetSection<ApplicationConfigurationSection>("applicationConfiguration").ResourceLocations;
+            var configurationSection = this._configuration.ResourceLocations;
 
-            return string.Concat(configurationSection.BasePath, configurationSection.Resource(type).Path);
+            var filePath = string.Concat(configurationSection.BasePath, configurationSection.Resource(type).Path);
+
+            return filePath;
         }
     }
 }
