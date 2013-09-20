@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="DependancyInjectionControllerFactory.cs" />
     <Compile Include="ExtendedWebViewPage.cs" />
+    <Compile Include="PerRequestLifetimeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebApiDependancyInjectionControllerFactory.cs" />
   </ItemGroup>

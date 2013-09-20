@@ -6,9 +6,7 @@
 namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
 
     using JamesDibble.ApplicationFramework.Configuration;
     using JamesDibble.ApplicationFramework.Data.Persistence;
@@ -22,6 +20,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
     public sealed class EntityContext : DbContext, IEntityContext
     {
         private readonly ITypeMappingDictionary _typeMapping;
+        private readonly DateTime _createTime;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="EntityContext"/> class.
@@ -53,6 +52,7 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.AutoDetectChangesEnabled = false;
             this._typeMapping = typeMapping;
+            this._createTime = DateTime.Now;
         }
 
         /// <summary>
@@ -75,17 +75,17 @@ namespace JamesDibble.ApplicationFramework.Data.Persistence.EntityFramework
                 string.Format("A DbSet for the type {0} could not be created", typeof(T).Name));
         }
 
-        /// <summary>
-        /// Execute <see cref="M:System.Data.Entity.DbContext.SaveChanges"/> upon the object graph as it stands.
-        /// </summary>
-        /// <returns>
-        /// The number of objects written to the underlying database..
-        /// </returns>
-        public override int SaveChanges()
-        {
-            this.ChangeTracker.DetectChanges();
-            return base.SaveChanges();
-        }
+        /////// <summary>
+        /////// Execute <see cref="M:System.Data.Entity.DbContext.SaveChanges"/> upon the object graph as it stands.
+        /////// </summary>
+        /////// <returns>
+        /////// The number of objects written to the underlying database..
+        /////// </returns>
+        ////public override int SaveChanges()
+        ////{
+        ////    this.ChangeTracker.DetectChanges();
+        ////    return base.SaveChanges();
+        ////}
 
         private static IConfigurationManager ConfigurationManagerGuard(IConfigurationManager configuration)
         {
