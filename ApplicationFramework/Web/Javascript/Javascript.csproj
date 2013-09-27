@@ -45,7 +45,14 @@
     <Content Include="imageLoader.min.js">
       <DependentUpon>imageLoader.js</DependentUpon>
     </Content>
+    <Content Include="pjax.js" />
+    <Content Include="pjax.min.js">
+      <DependentUpon>pjax.js</DependentUpon>
+    </Content>
     <Content Include="scrollToTop.js" />
+    <Content Include="scrollToTop.min.js">
+      <DependentUpon>scrollToTop.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="imageLoader.min.js.map">
