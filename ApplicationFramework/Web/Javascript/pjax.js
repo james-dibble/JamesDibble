@@ -66,28 +66,32 @@
 
                 var actionOptions = getActionOptions(state.data.actionOptionsId);
 
-                $.ajax({
-                    url: location.pathname + location.search,
-                    beforeSend: function (xhrObj) {
-                        xhrObj.setRequestHeader("X-PJAX", "true");
-                        actionOptions.options.preLoad(xhrObj);
-                    },
-                    success: function (data, status, xhr) {
-                        if (actionOptions.options.analytics) {
-                            actionOptions.options.analytics.push(['_trackPageview']);
-                        }
+                actionOptions.options.preLoad();
 
-                        var title = xhr.getResponseHeader("X-PJAX-Title");
-                        if (title) {
-                            document.title = title;
-                        }
+                setTimeout(function () {
+                    $.ajax({
+                        url: location.pathname + location.search,
+                        beforeSend: function (xhrObj) {
+                            xhrObj.setRequestHeader("X-PJAX", "true");
+                        },
+                        success: function (data, status, xhr) {
+                            if (actionOptions.options.analytics) {
+                                actionOptions.options.analytics.push(['_trackPageview']);
+                            }
 
-                        actionOptions.options.onLoad(data, status, xhr);
-                    },
-                    error: function (jqXhr, textStatus, errorThrown) {
-                        actionOptions.options.onErrorLoading(jqXhr, textStatus, errorThrown);
-                    }
-                });
+                            var title = xhr.getResponseHeader("X-PJAX-Title");
+
+                            if (title) {
+                                document.title = title;
+                            }
+
+                            actionOptions.options.onLoad(data, status, xhr);
+                        },
+                        error: function (jqXhr, textStatus, errorThrown) {
+                            actionOptions.options.onErrorLoading(jqXhr, textStatus, errorThrown);
+                        }
+                    });
+                }, 1000);
 
                 return false;
             } else {
